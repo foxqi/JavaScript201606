@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+img{ width:100px; height:100px; overflow:hidden; border:none;}
+div{ position:absolute; left:200px; top:200px; background:red; width:100px; height:100px; cursor:move; -webkit-user-select:none;}
+</style>
+</head>
+
+<body>
+<div style="left:0; top:0"  >div1</div>
+<div style="top:200px; left:0;" ><img src="img1/img1.jpg" width="100" height="100"></div>
+<div ><img src="img1/img2.jpg" width="100" height="100"></div>
+</body>
+</html>
+<script src="js/event1.js"></script>
+<script>
+
+//以下方法中的this都是指向的当前被拖拽的元素，这是原则，这是原则是由事件绑定的原则决定的：把方法绑定给那个元素，则方法在执行的时候，方法里的this就会指向这个元素
+function down(e){//准备拖拽
+	this.x=this.offsetLeft;
+	this.y=this.offsetTop;
+	this.mx=e.pageX;
+	this.my=e.pageY;
+	
+	if(this.setCapture){
+		this.setCapture();//这是mousemove事件的专有方法，专门用来处理当mousemove事件连续触发时，元素会丢失鼠标的问题的。
+		//元素会掉丢鼠标，是由于浏览器的性能问题造成的。
+		//this.setCapture是IE专用的方法，后来fireFox也实现了
+		//mousemove事件大约8ms
+		on(this,"mousemove",move);
+		on(this,"mouseup",up);
+	}else{
+		/*
+		function processThis(fn,obj){
+			return function(e){fn.call(obj,e)}	
+		}
+		*/
+		this.MOVE=processThis(move,this);
+		/*
+		processThis的执行相当于以下两行
+		var obj=this;
+		this.MOVE=function(e){move.call(obj,e)}
+		*/
+		
+		this.UP=processThis(up,this);
+		
+		//H5中也实现的processThis功能的方法，叫Function.prototype.bind
+		this.MOVE=move.bind(this);
+		this.UP=up.bind(this);
+		on(document,"mousemove",this.MOVE);
+		on(document,"mouseup",this.UP);
+	}
+	
+	e.preventDefault();//如果被拖拽的盒子中，包含了文字、图片等inline属性的内容，当鼠标按下去的时候，会默认产生一个选中的动作，将其它事件破坏掉
+
+}
+
+function move(e){//拖拽进行
+	this.style.left=this.x+(e.pageX-this.mx)+"px";
+	this.style.top=this.y+(e.pageY-this.my)+"px";
+	
+}
+
+function up(e){//拖拽结束
+	if(this.releaseCapture){
+		this.releaseCapture();
+		off(this,"mousemove",move);
+		off(this,"mouseup",up);
+	}else{
+		off(document,"mousemove",this.MOVE);
+		off(document,"mouseup",this.UP);	
+	}
+	
+}
+
+var eles=document.getElementsByTagName("div");
+for(var i=0;i<eles.length;i++){
+	on(eles[i],"mousedown",down);	
+	
+}
+
+</script>

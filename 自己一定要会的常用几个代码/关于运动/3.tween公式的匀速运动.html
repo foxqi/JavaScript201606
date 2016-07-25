@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: absolute;
+            left: 300px;
+            top: 0;
+        }
+        #target{
+            width: 1px;
+            height: 200px;
+            background:red;
+            position: absolute;
+            left: 1000px;
+            top: 0;
+        }
+    </style>
+</head>
+<div id="div1"></div>
+<div id="target"></div>
+<script src="utils1.js"></script>
+<body>
+<script>
+  /*
+  * t: time 时间--走了多久的时间
+  * b：begin 起始位置
+  * c:要走的距离
+  * d：duration：总共需要走的时间
+  *
+  * */
+//    c*t/d+b
+
+/*  //如果不加b，我们的初始位置从0开始而不是从300开始，为了实现从300开始走到1000的位置，必须加b
+    function Linear(t,b,c,d){//tween公式-匀速公式
+        return c*t/d+b     //(t/d时间比*c总距离+b（为了一开始的t为0，不加b会跳hui0的位置）=得到的是1000（其实是为了求出没累加一段时间后走了多长）)
+    }
+    var oDiv=document.getElementById('div1')
+//  以下五个都是用来设置匀速运动的参数值
+    var begin=utils.css(oDiv,'left');
+    var target=1000;//总距离
+    var change=target-begin;
+    var duration=1000;//自己设置的总时间
+    var time=null;//或者为0
+    //开启定时器，目的是为了累加时间，并且给维棠设置最新的位置
+    var timer=setInterval(function(){
+        //时间的累加
+        time+=10;
+        //当时间超过总时间的时候，直接把物体设置到目标值上
+        if(time>=duration){
+            utils.css(oDiv,'left',target)
+            clearInterval(timer);
+            return
+        }
+        //通过匀速公式，求出每次物体所在的新位置
+        var curLeft=Linear(time,begin,change,duration)
+        utils.css(oDiv,'left',curLeft);//设置物体所在的新位置
+
+    },10)*/
+
+
+    function Linear(t,b,c,d){
+        return c*t/d+b
+    }
+    var oDiv=document.getElementById('div1')
+    var begin=utils.css(oDiv,'left');
+    var target=1000
+    var change=target-begin
+    var duration=1000
+    var time=0;
+    var timer=setInterval(function(){
+        time+=10;
+        if(time>=duration){
+            utils.css(oDiv,'left',target);
+            clearInterval(timer);
+            return
+        }
+        var curLeft=Linear(time,begin,change,duration);
+        utils.css(oDiv,'left',curLeft)
+
+    },30)
+</script>
+</body>
+</html>

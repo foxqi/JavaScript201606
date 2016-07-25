@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var str = 'sssaaBbsbbssSaAccACcCCcAA';
+    //思路1： 1 排序 2.假设法
+//    str = str.split('').sort(function (a, b) {
+//        return a.localeCompare(b);
+//    }).join('');
+//    var reg = /(\w)\1+/gi;
+//    var num = 0;
+//    var max = '';
+//    //求出现最多的次数？
+//    str.replace(reg, function ($0, $1) {
+//        if($0.length>num){//当$0.length大于num的时候，$0.length就是最多的次数；同时$0对应的$1就是出现次数最多的字母
+//            num=$0.length;
+//            max=$1;
+//        }else if($0.length===num){//当次数一般大的时候，我们进行字符串拼接；保留出多个出现次数最多的字母
+//            max+=','+$1
+//        }
+//    });
+//    console.log('出现次数最多的字母是：'+max,'最多出现'+num+'次')
+
+    str=str.split('').sort(function(a,b){
+        return a.localeCompare(b);
+    }).join('');
+    var num=0;
+    var max='';
+    str.replace(/(\w)\1+/gi,function($0,$1){
+        if($0.length>num){
+            num=$0.length;
+            max=$1;
+        }else if($0.length===num){
+            max+=','+$1
+        }
+    })
+    console.log('出现次数最多的字母是：'+max,'最多出现'+num+'次')
+</script>
+</body>
+</html>

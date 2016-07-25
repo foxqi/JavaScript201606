@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: absolute;
+            left: 300px;
+            top: 30px;
+        }
+        #target{
+            width: 1px;
+            height: 200px;
+            background:red;
+            position: absolute;
+            left: 1000px;
+            top: 0;
+        }
+    </style>
+</head>
+<div id="div1"></div>
+<script src="utils1.js"></script>
+<body>
+<script>
+
+    //Linear公式
+ /*  function Linear(t,b,c,d){
+        return c*t/d+b
+    }
+    var oDiv=document.getElementById('div1')
+    //初始位置：初始left值，初始top值
+    var beginLeft=utils.css(oDiv,'left'),beginTop=utils.css(oDiv,'top');
+    //目标位置：left和top的目标值
+    var targetLeft=1000,targetToP=500;
+    var changeLeft=targetLeft-beginLeft,changeTop=targetToP-beginTop;
+    var duration=1000;//要走的总时间
+    var time=null;
+    //开启定时器的目的是为了累加时间，并给物体设置新的位置
+    var timer=setInterval(function(){
+        time+=10;//初始时间不断累加
+        if(time>=duration){//当time累加值超过duration总时间的时候，把物体设置到目标值，同时停止运动
+            utils.css(oDiv,{
+                left:targetLeft,
+                top:targetToP
+            })
+            oDiv.style.background='black'
+            clearInterval(timer)
+            return
+        }
+        //每次获取最新的位置：left值，top值
+        var curLeft=Linear(time,beginLeft,changeLeft,duration)
+        var curTop=Linear(time,beginTop,changeTop,duration);
+        //设置物体最新的位置
+        utils.css(oDiv,{
+            left:curLeft,
+            top:curTop
+        })
+    },10)*/
+
+function Linear(t,b,c,d){
+    return c*t/d+b
+}
+    var oDiv=document.getElementById('div1')
+    var targetLeft=1000,targetTop=500
+    var duration=1000;
+    var beginLeft=utils.css(oDiv,'left'),beginTop=utils.css(oDiv,'top')
+    var changeLeft=targetLeft-beginLeft,changeTop=targetTop-beginTop;
+    var time=null;
+    var timer=setInterval(function(){
+        time+=10;
+        if(time>=duration){
+            utils.css(oDiv,{
+                left:targetLeft,
+                top:targetTop,
+                background:'yellow',
+                borderRadius:'50%'
+            })
+            clearInterval(timer);
+            return
+        }
+
+        var curLeft=Linear(time,beginLeft,changeLeft,duration)
+        var curTop=Linear(time,beginTop,changeTop,duration)
+        utils.css(oDiv,{
+            left:curLeft,
+            top:curTop
+        })
+
+       },10)
+</script>
+
+</body>
+</html>

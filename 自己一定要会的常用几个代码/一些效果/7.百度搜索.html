@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+            font-family: "微软雅黑";
+            font-size: 20px;
+            outline: none;/*去掉input的篮光*/
+        }
+        a{
+            display: block;
+            color: #333;
+        }
+        .box{
+            width: 540px;
+            position: absolute;
+            left: 50%;
+            top: 10%;
+            margin-left: -270px;
+        }
+        .box input{
+            width: 100%;
+            display: block;
+            height: 40px;
+            padding: 10px;
+            border: 1px solid blue;
+        }
+        .box ul{
+            display: none;
+            margin-top: -1px;
+            width: 560px;
+            border: 1px solid blue;
+        }
+        .box ul li{
+            height: 35px;
+            line-height: 35px;
+        }
+        .box ul li a{
+            height: 40px;
+            line-height: 40px;
+            padding-left: 10px;
+        }
+        .box ul li a:hover{
+            background: #cccccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <input type="text" id="search"/>
+    <ul id="list">
+        <li><a href="javascript:;">珠峰培训-javascript培训</a></li>
+        <li><a href="javascript:;">珠峰培训node</a></li>
+        <li><a href="javascript:;">珠峰培训HTML5</a></li>
+        <li><a href="javascript:;">珠峰培训-javascript培训</a></li>
+        <li><a href="javascript:;">珠峰培训reactJs</a></li>
+    </ul>
+</div>
+<!--显示：1）聚焦时里面有内容，会显示下来菜单2）编辑内容框：如果有内容，会显示下拉单
+隐藏：1）聚焦或者删除内容时，内容为空，就隐藏2)点击页面任何一个地方，让他消失 3）点击下拉单中的每一行，同时，搜索框中的内容会变成点击的这一行的内容，并隐藏
+-->
+<script>
+    //1.获取元素
+  var oInp=document.getElementById('search');
+  var oUl=document.getElementById('list');
+    //1）当input聚焦的时候，如果有内容，ul就会显示，否则：隐藏
+    // 2）当我们编辑（增删改）内容的时候，如果input中有内容，ul就会显示，否则：隐藏
+  oInp.onkeyup=oInp.onfocus=function(){//onkeyup输入的时候就会显示，onfocus聚焦的时候就会显示
+//      console.log(oInp.value.length)   去除全部空格，开头结尾空格
+      var val=this.value.replace(/(^ +)|( +$)/g,'')
+      oUl.style.display=val.length>0?'block':'none'
+
+  }
+    //点击页面任何一个地方，让ul隐藏
+    document.body.onclick=function(e){//应用此方法时，body没有被撑开，所以一定要设置css：html和body的宽高
+//        alert(123)
+        e=e||window.event;
+        var tar= e.target|| e.srcElement;
+//        if(tar.id==='search'){//去除冒泡的思路1：通过事件源id===search单独处理
+//            return
+//        }
+        //如果点击的事件源是list下面的a 的时候（事件是a 并且a的父级的父级是ul），让内容框的内容变成我们点击的列表的内容，同时，隐藏
+        if(tar.tagName.toLowerCase()==='a'&&tar.parentNode.parentNode.id==='list'){
+            oInp.value=tar.innerHTML//表单元素的内容用的是value
+        }
+        oUl.style.display='none'
+    }
+    oInp.onclick=function(e){//input处理：去除冒泡的思路2（处理冒泡到body的时候，一定要设置css：html和body的宽高）
+        e=e||window.event;
+        e.stopPropagation? e.stopPropagation(): e.cancelBubble=true
+    }
+</script>
+</body>
+</html>

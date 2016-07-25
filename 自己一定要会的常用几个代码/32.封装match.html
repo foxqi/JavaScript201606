@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var str='zhufeng2016huigu2015zhanwan2017';
+    //需求：封装match：把如何正则的所有内容以数组的形式返回；
+    /*核心原理：用exec每次都捕获到正确的内容放入新数组来实现match；
+    * 1.是否有参数？正则；
+    * 2.返回值：数组
+    * 3.封装一个公有的方法放在 String.prototype
+    *
+    * */
+    String.prototype.myMatch=function(reg){
+        var ary=[];
+        var res=reg.exec(this);
+        //当第一次捕获成功的时候，才会开始以后的每次捕获，以后需要捕获多少次，不知道，所以用while循环，把每次捕获到的内容（捕获到内容每次都是数组，我们要的数组的第一项）都插入ary;
+        while(res){
+            ary[ary.length]=res[0];
+            res=reg.exec(this);
+        }
+        return ary;
+    }
+    var reg=/\d+/g;
+    var ary=str.myMatch(reg)
+    alert(ary)
+</script>
+</body>
+</html>

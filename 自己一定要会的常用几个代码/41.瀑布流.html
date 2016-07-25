@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            list-style: none;
+        }
+        div{
+            width: 900px;
+            margin:0px auto;
+        }
+        ul{
+            width: 260px;
+            margin:10px;
+            float: left;/*
+            height: 10px;
+            border: 1px solid red;*/
+
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul></ul>
+    <ul></ul>
+    <ul></ul>
+</div>
+<script src="utils.js"></script>
+<script>
+    //思路：动态创建li（高度随机，背景色随机）,然后分别插入ul中最短的（类数组转数组，sort）；
+    var aUl=document.getElementsByTagName('ul');
+    //1.线动态创建一个元素
+    function createLi(){
+        var oLi=document.createElement('li');
+        oLi.style.height=utils.rnd(100,300)+'px';
+        oLi.style.backgroundColor='rgb('+utils.rnd(0,255)+','+utils.rnd(0,255)+','+utils.rnd(0,255)+')';
+        return oLi;
+    }
+    //2.动态创建50个元素，分别插入UL中最短的
+    function li50(){
+        for(var i=0; i<50; i++){
+            var oLi=createLi();
+            var ary=utils.listToArray(aUl);
+            ary.sort(function(a,b){
+                return utils.getCss(a,'height')-utils.getCss(b,'height');
+            });
+            ary[0].appendChild(oLi);
+        }
+    }
+    li50();
+    window.onscroll=function(){
+        var scrollBottom=utils.win('scrollTop')+utils.win('clientHeight');
+        //内容的高度 document.body.scrollHeight;
+        if(scrollBottom>=document.body.scrollHeight-500){
+            li50();
+        }
+    }
+
+</script>
+</body>
+</html>

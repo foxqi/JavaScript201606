@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 30px;
+        }
+        ul{
+            height: 30px;
+            line-height: 30px;
+        }
+        li{
+            /*height: 30px;*/
+            /*/!*line-height: 30px;*!/*/
+            margin-left: 50px;
+            font-size: 20px;
+        }
+        .bg0{
+            background: lightblue;
+        }
+        .bg1{
+            background: lightcoral;
+        }
+        .bg2{
+            background: lightgoldenrodyellow;
+        }
+        .changeBg{
+            background: lime;
+        }
+
+
+    </style>
+</head>
+<body>
+<ul id="nine"></ul>
+<script>
+    var oNine=document.getElementById('nine');
+    var oLi=oNine.getElementsByTagName('li');
+    var oSpan=document.getElementsByTagName('span');
+    var str='';
+    for(var i=1;i<=9;i++){
+        str+='<li>';
+        for(var j=1;j<=i;j++){
+            str+="<span>"+(j+'*'+i+'='+j*i)+"</span>"
+        }
+        str+='</li>';
+    }
+    oNine.innerHTML=str;
+    for(var a=0;a<oSpan.length;a++){
+        oSpan[a].className='bg'+a%3;
+        oSpan[a].onmouseover=function(){
+            oldBg=this.className;
+            this.className='changeBg'
+        };
+        oSpan[a].onmouseout=function(){
+            this.className=oldBg;
+        }
+    }
+
+</script>
+</body>
+</html>

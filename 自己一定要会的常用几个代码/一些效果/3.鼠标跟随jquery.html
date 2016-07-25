@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .box{
+            width: 640px;
+            margin:30px auto;
+            position: relative;
+        }
+        .box img{
+            width: 150px;
+            margin-left: 10px;
+            float: left;
+        }
+        #mark{
+            display: none;
+            position: absolute;
+            left:0;
+            top:0;
+            width: 450px;
+        }
+        #mark img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <img src="img1/apple_1.jpg" realImg="img1/apple_1_bigger.jpg" alt=""/>
+    <img src="img1/apple_2.jpg" realImg="img1/apple_2_bigger.jpg" alt=""/>
+    <img src="img1/apple_3.jpg" realImg="img1/apple_3_bigger.jpg" alt=""/>
+    <img src="img1/apple_4.jpg" realImg="img1/apple_4_bigger.jpg" alt=""/>
+
+    <div id="mark"><img src="img1/apple_1_bigger.jpg" alt=""/></div>
+</div>
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+    var $box=$('.box');
+    var $aImg=$box.children('img');
+    var $mark=$('#mark');
+    var $offset=$box.offset();//{left:xxx,top:xxx}
+    //1.鼠标移入每张图片，让大图显示在求出距离box左上角的位置；鼠标位置距离可视区左上角的；我们要求大图的位置是距离box左上角的
+    $aImg.mouseover(function(e){
+//        优化1.在移入的时候，可以不设置位置，让直接显示
+//        扩展：$(this)这个对象只当前触发事件的这个元素---事件源
+//        console.log(e.target==this)=>true
+//        $mark.stop().show(500).find('img').attr('src',$(this).attr('realImg'));
+//    });
+    $mark.stop().show(500).find('img').attr('src',$(e.target).attr('realImg'));
+    });
+
+    $aImg.mousemove(function(e){
+        var left= e.clientX-$offset.left+20;//加20是为了，鼠标移动的时候，鼠标会跑到大图，脱离小图触发hide，导致出现闪烁，
+        var top= e.clientY-$offset.top+20;
+        $mark.css({left:left,top:top});//只管位置，不管显示
+    });
+    $aImg.mouseout(function(){
+        $mark.stop().hide();
+    })
+
+</script>
+</body>
+</html>

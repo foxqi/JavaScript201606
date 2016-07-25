@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var str='zhufeng2016huigu2015zhanwan2017';
+    var reg=/\d+/g;
+    /*console.log(reg.lastIndex)
+    console.log(reg.exec(str));
+    console.log(reg.lastIndex)
+    console.log(reg.exec(str));*/
+//    var ary=[];//用来保存我们匹配到的每个内容的
+//    var res=reg.exec(str);
+//    while(res){
+//        ary.push(res[0]);//把捕获到的内容的第一项放进数组
+//        res=reg.exec(str);//继续捕获
+//    }
+    var ary=str.match(reg);
+    console.log(ary)
+</script>
+</body>
+</html>

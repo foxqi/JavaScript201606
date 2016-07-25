@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #target{
+            width: 1px;
+            height: 200px;
+            background:red;
+            position: absolute;
+            left: 1000px;
+            top: 0;
+        }
+    </style>
+</head>
+<div id="div1"></div>
+<div id="target"></div>
+<script src="utils1.js"></script>
+<body>
+<script>
+    /*
+    * 定义4个变量
+    * var target    总距离
+    * var duration  总时间
+    * var interval  频率
+    * var step=target/duration*interval
+    *
+    * 2.开启定时器    * 获取最新位置   * 停止条件：新位置   * 最新位置  * 重新赋值
+   */
+    var oDiv=document.getElementById('div1');
+    var target=utils.win('clientWidth')- utils.css(oDiv,'width')
+//    var target=1000;
+    var duration=1000;
+    var interval=10;
+    var step=target/duration*interval;
+    var timer=setInterval(function(){
+        var curLeft=utils.css(oDiv,'left');
+        if(curLeft+step>=target){
+            utils.css(oDiv,'left',target);
+            clearInterval(timer);
+            return;
+        }
+        curLeft+=step;//每次在最新的距离上加上固定步长
+        utils.css(oDiv,'left',curLeft);
+    },interval)
+</script>
+</body>
+</html>

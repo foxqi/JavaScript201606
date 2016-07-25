@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            font-size: 40px;
+        }
+        textarea{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<textarea  cols="50" rows="30">灾害发生后，党中央、国务院高度重视。正在乌兹别克斯坦访问并出席上海合作组织峰会的中共中央总书记、国家主席、中央军委主席习近平立即作出重要指示，要求国务院派工作组前往指导抢险救灾，代表党中央、国务院慰问受灾群众。要求全力组织抢救受伤人员，最大限度减少人员伤亡，并做好遇难人员善后和受灾群众安置工作。要求有关地方和部门强化气象监测预报和地质灾害评估等工作。做好重特大自然灾害防范和处置工作，切实保障人民群众生命财产安全。</textarea>
+<input type="button" id="btn" value="关键词过滤"/>
+<textarea  cols="50" rows="30"></textarea>
+<script>
+    var aTxt=document.getElementsByTagName('textarea');
+    var oBtn=document.getElementById('btn');
+    //点击按钮的时候把过滤后的第一个框的内容，放到第二个框内；
+    oBtn.onclick=function(){
+        var reg=/习近平|群众|人员/g;
+        aTxt[1].value=aTxt[0].value.replace(reg,function(){
+            console.log(arguments)
+            var str='';
+            for(var i=0; i<arguments[0].length; i++){
+                str+='>_<'
+            }
+            return str;
+        })
+    }
+</script>
+</body>
+</html>

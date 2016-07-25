@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    /*
+    * 1.replace:匹配到一次内容的时候，替换一次
+    * 2.replace的第二个参数执行多少次取决于我们匹配成功的次数
+    * 3.replace第二个参数-arguments [匹配的大正则的内容，小分组的内容，索引，原始字符串]
+    * 4.可以把小分组的内容取出来，做为数组的索引；
+    * */
+    var str='my name is {0},my age is {1},i come form {2}';
+    var ary=['珠峰','8','北京'];
+    //1.想办法拿到数字，然后把数字做为索引
+    //2.{0} {1} {2}
+    //replace(用来被替换的，用来替换他的)
+    str=str.replace(/{(\d+)}/g,function(){
+        //console.log(arguments)
+        return ary[arguments[1]];
+    })
+    console.log(str)
+</script>
+</body>
+</html>

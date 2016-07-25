@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;background: red;
+            position: absolute;
+            left: 0;
+            top: 10px;
+        }
+        #target{
+            width: 1px;
+            height: 100px;
+            background: blue;
+            position: absolute;
+            left: 1000px;
+            top: 10px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="div1"></div>
+<div id="target"></div>
+<script src="utils1.js"></script>
+<script>
+    var oDiv=document.getElementById('div1')
+//    var target=utils.win('clientWidth')-utils.css(oDiv,'width')
+    var target=1000-utils.css(oDiv,'width')
+    var step=30;
+    var timer=setInterval(function(){
+        var curLeft=utils.offset(oDiv).left
+        if(curLeft+step>=target){
+            curLeft=utils.css(oDiv,'left',target);
+            clearInterval(timer);
+            return
+        }
+        curLeft+=step;
+        curLeft=utils.css(oDiv,'left',curLeft)
+    },30)
+</script>
+</body>
+</html>

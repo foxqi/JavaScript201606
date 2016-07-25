@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //重复子项 也叫做 分组引用；
+    //“wood look feel foot book good week food”;
+    var reg=/\w(\w)\1\w/
+    //\1 ：跟正则的第一个小分组一模一样；
+    //\2:跟正则的第二个小分组一模一样；
+    //......
+
+    /*var str='1212';
+    var reg=/(\d)\1(\d)\2/;
+    console.log(reg.test(str))*/
+    var str='aAabBbcc';
+    var reg=/(\w)\1+/gi;
+    str.replace(reg,function(){
+        console.log(arguments)
+    })
+</script>
+</body>
+</html>

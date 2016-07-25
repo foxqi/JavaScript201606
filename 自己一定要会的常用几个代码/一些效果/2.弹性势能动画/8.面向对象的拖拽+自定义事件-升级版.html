@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: red;
+            cursor: move;
+            /*阻止默认行为，选中文字*/
+            -webkit-user-select: none;
+        }
+        #div2{
+            background: green;
+            top: 100px;
+            left: 150px;
+        }
+        #div3{
+            background: blue;
+            top: 200px;
+            left: 400px;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<div id="div3"></div>
+<script src="event2.js"></script>
+<script src="drag-oop2.js"></script>
+<script>
+
+    var eles=document.getElementsByTagName('div');
+    var zIndex=0;
+    function increaseIndex(){
+        this.ele.style.zIndex=++zIndex;
+    }
+    for(var i=0;i<eles.length;i++){
+       var obj=new Drag(eles[i]).on('dragstart',increaseIndex).on('dragstart',clearEffect).on('draging',getSpeed).on('dragend',drop).on('dragend',fly);
+        if(i==0){
+            obj.range({l:0,r:600,t:0,b:500});
+        }
+        obj.border();
+        /*obj.on('dragstart',increaseIndex);
+        obj.on('dragstart',clearEffect);
+        obj.on('draging',getSpeed);
+        obj.on('dragend',drop);
+        obj.on('dragend',fly);*/
+
+
+    }
+
+
+    function clearEffect() {
+        clearTimeout(this.flyTimer);
+        clearTimeout(this.dropTimer)
+    }
+    function getSpeed(e) {
+        if (this.prevPosi) {
+            this.speed = e.pageX - this.prevPosi;
+            this.prevPosi = e.pageX;
+        } else {
+            this.prevPosi = e.pageX
+        }
+    }
+    function fly() {
+        this.speed *= 0.98;
+        var maxRight = (document.documentElement.clientWidth || document.body.clientWidth) - this.ele.offsetWidth;
+        var current = this.ele.offsetLeft + this.speed;
+
+        if (current >= maxRight) {
+            this.ele.style.left = maxRight + 'px';
+            this.speed *= -1;
+        } else if (current <= 0) {
+            this.ele.style.left = 0;
+            this.speed *= -1;
+        } else {
+            this.ele.style.left = current + 'px';
+        }
+
+
+        if (Math.abs(this.speed) >= 0.5) {
+            this.flyTimer = setTimeout(processThis(fly, this), 25);
+        }
+    }
+    function drop() {
+        if (this.dropSpeed) {
+            this.dropSpeed += 9.8;
+        } else {
+            this.dropSpeed = 9.8;
+        }
+        this.dropSpeed *= 0.98;
+        var maxBottom = (document.documentElement.clientHeight || document.body.clientHeight) - this.ele.offsetHeight;
+        var current = this.ele.offsetTop + this.dropSpeed;
+        if (current >= maxBottom) {
+            this.ele.style.top = maxBottom + 'px';
+            this.dropSpeed *= -1;
+            this.flag++;
+        } else {
+            this.ele.style.top = current + 'px';
+            this.flag = 0;
+
+        }
+        if (this.flag < 2) {
+            this.dropTimer = setTimeout(processThis(drop, this), 20);
+        }
+    }
+</script>
+
+</body>
+</html>

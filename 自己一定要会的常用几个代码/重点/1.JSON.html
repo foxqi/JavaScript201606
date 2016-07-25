@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var utils= {
+        jsonParse: function jsonParse(str) {
+            //当‘JSON’这个属性在window对象上的时候，就用JSON.parse()这个方法；否则，就用eval,eval记得一定要拼接括号
+            return 'JSON' in window ? JSON.parse(str) : eval('(' + str + ')')
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<script src="deepEvent.js"></script>
+<script>
+    var oDiv=document.getElementById('div');
+    var i=0;
+    function fn1(){console.log(1)}
+    function fn2(){console.log(2)}
+    function fn3(){
+        console.log(3);
+        i++;
+        if(i==2){
+            off(this,'click',fn1);
+            off(this,'click',fn2);
+            off(this,'click',fn3);
+        }
+
+    }
+    function fn4(){console.log(4)}
+    function fn5(){console.log(5)}
+    function fn6(){console.log(6)}
+    function fn7(){console.log(7)}
+    function fn8(){console.log(8)}
+    function fn9(){console.log(9)}
+    function fn10(){console.log(10)}
+    function fn11(){console.log(11)}
+    on(oDiv,'click',fn1);
+    on(oDiv,'click',fn2);
+    on(oDiv,'click',fn3);
+    on(oDiv,'click',fn4);
+    on(oDiv,'click',fn5);
+    on(oDiv,'click',fn6);
+    on(oDiv,'click',fn7);
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+        padding: 0;
+        }
+        .box{
+            width: 600px;
+            border: 5px solid lightgreen;
+            box-shadow: 4px 4px 10px lightgreen;
+            padding: 10px;
+            margin: 30px auto;
+            border-radius: 10px;
+        }
+        .box table{
+            width: 100%;}
+        .box table thead{
+            background:darkgreen;
+            color: #ffffff;
+        }
+        .box table tr{
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px;
+        }
+        .box table tr td{
+            text-align: center;
+        }
+        .cursor{
+            cursor: pointer;
+        }
+        .bg0{
+            background: lightgreen;
+        }
+        .bg1{
+            background: linen;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <table id="tab" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th class="cursor">姓名</th>
+            <th class="cursor">年龄</th>
+            <th class="cursor">成绩</th>
+            <th class="cursor">性别</th>
+        </tr>
+        </thead>
+        <tbody>
+           <!--<tr class="bg0">-->
+               <!--<td>令狐冲</td>-->
+               <!--<td>24</td>-->
+               <!--<td>98</td>-->
+               <!--<td>0</td>-->
+           <!--</tr>-->
+           <!--<tr class="bg1">-->
+               <!--<td>任盈盈</td>-->
+               <!--<td>22</td>-->
+               <!--<td>80</td>-->
+               <!--<td>1</td>-->
+           <!--</tr>-->
+
+        </tbody>
+
+    </table>
+
+
+</div>
+<script charset="utf-8" src="utils.js"></script>
+<script charset="utf-8" src="tab.js"></script>
+
+</body>
+</html>

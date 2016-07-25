@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var strDate='2016-6-23 17:26:30';
+    var str='{3}时{4}分{5}秒';//模板
+    String.prototype.myFomatDate=function(str){
+        //this - strDate;功能：strDate最终替换为 str这个模板的形式
+        //1.求数组 2.拿数组的内容去替换模板的内容 3;已经经过替换的strDate内容
+        //1.把strDate变成数组  用match也可以
+//        var ary=this.match(/\d+/g); 第一种用match
+
+        var reg=/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})\s+(\d{1,2}):(\d{1,2}):(\d{1,2})$/;
+        var ary=[];
+        this.replace(reg,function(){
+            ary=Array.prototype.slice.call(arguments,1,arguments.length-2);
+        });
+        //2.拿数组的内容去替换模板的内容
+        var str=str||'{0}年{1}月{2}日 {3}时{4}分{5}秒';
+         //用str这个模板中匹配到的数字作为数组的索引，取出数组对应项的内容，拿这个内容替换了模板中的内容
+        return str.replace(/{(\d+)}/g,function(){
+            var tmp=ary[arguments[1]];
+            tmp=tmp>=0&&tmp<10?'0'+Number(tmp):tmp;
+            return tmp;//返回已经匹配好的模板
+        })
+    };
+    var res=strDate.myFomatDate(str);
+    console.log(res);
+
+//    alert(Number('0000')=0)
+</script>
+</body>
+</html>

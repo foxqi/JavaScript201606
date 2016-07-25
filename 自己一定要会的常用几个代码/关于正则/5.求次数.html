@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //出现次数最多的字母，以及出现多少次；
+    /*思路1：利用对象不重名的特性；
+    * 1.利用对象不重名的特性 {a:4,b:3,s:6,d:6.....}
+    * 2.求最多的次数
+    * 3.对多次数对应的属性名 ary;
+    * */
+    var str='sssBbsbbssSAAccACcCCcAA';
+    var reg=/[a-zA-Z]/gi;
+    //1.利用对象不重名的特性 {a:4,b:3,s:6,d:6.....}
+    var obj={};
+    //利用replace第二个参数-回调函数，把我们匹配到的每个字母都先放到一个对象中，给它赋值为1；
+
+    str.replace(reg,function(){//
+        //console.log(arguments)
+        arguments[0]=arguments[0].toLowerCase();
+        //2.因为匹配一次，往对象中放一次，每次放之前，都会先看对象中是否已经存在，如果存在，让他的值+=1；
+        if(obj[arguments[0]]){
+            obj[arguments[0]]++;
+        }else{
+            //1.把我们匹配到的每个字母都先放到一个对象中，给它赋值为1；
+            obj[arguments[0]]=1;
+        }
+    })
+    //2.求最多的次数-假设法
+    //对象中每个属性名都是字母，每个属性值字母出现的次数；
+    //先假设出现最多的次数为0；然后遍历对象中的每一项，看每一项属性名对应的属性值是否比num大，如果大num=这个属性值,一轮循环后，num就存的是出现对多的次数；
+    var num=0;//求出最多的次数；
+    for(var attr in obj){
+        if(obj[attr]>num){
+            num=obj[attr];
+        }
+    }
+    //3.对多次数对应的属性名 ary;
+    //遍历对象中的每一项，看哪个对象的属性值===最大的次数num;如果等于，这个值对应的属性名就是我们要找的；把它放入数组就可以了；
+    var ary=[];//求出现次数最多的字母；
+    for(var attr in obj){
+        if(obj[attr]===num){
+            ary[ary.length]=attr;
+        }
+    }
+    console.log('出现次数最多的字母是：'+ary,'最多出现'+num+'次')
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

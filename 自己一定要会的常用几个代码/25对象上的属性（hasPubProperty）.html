@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    function A(){
+//        this.x=100;
+//    }
+//    A.prototype.showX=function(){};
+//    A.prototype.y=200;
+//    var a=new A;
+//    //hasPubProperty:判断是否为公有属性
+//    function hasPubProperty(arry,obj){
+//        //必须是对象上的属性 且 不是私有属性
+//        return arry in obj&&!obj.hasOwnProperty(attr);
+//    }
+//    alert(hasPubProperty('showX',a))
+
+    function A(){
+        this.x=100;
+    }
+    A.prototype.showX=function(){};
+    A.prototype.y=200;
+    var a=new A;
+    function hasPubProperty(arry,obj){
+        return arry in obj && !obj.hasPubProperty('attr')
+    }
+    alert(hasPubProperty('showX,a'))
+</script>
+</body>
+</html>

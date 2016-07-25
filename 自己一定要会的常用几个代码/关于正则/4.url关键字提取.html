@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //{tn:baiduimage,ipn:r,ct:201326592......}
+    var str='http://image.baidu.com/search/index?tn=baiduimage&ipn=r&ct=201326592&cl=2&lm=-1&st=-1&fm=result&fr=&sf=1&fmq=1462967508128_R&pv=&ic=0&nc=1&z=&se=1&showtab=0&fb=0&width=&height=&face=0&istype=2&ie=utf-8&word=%E5%88%98%E8%AF%97%E8%AF%97';
+    /*var reg=/([^?&=]+)=([^?&=]+)/g;
+    var obj={};
+    str.replace(reg,function($0,$1,$2){
+        obj[$1]=$2;
+    })*/
+    //功能：把字符串中（=号两边的值）转成对象的属性名和属性值；
+
+//    String.prototype.queryURLParameter=function(){
+//        //this-str;所有不需要传参
+//        var obj={};
+//        var reg=/([^?&=]+)=([^?&=]+)/g;
+//        this.replace(reg,function($0,$1,$2){
+//            obj[$1]=$2;
+//        });
+//        return obj;
+//
+//    }
+//    console.log(str.queryURLParameter());
+
+    String.prototype.queryURLParameter=function(){
+        var obj={};
+        var reg=/([^&=?]+)=([^&=?]+)/g;
+        this.replace(reg,function($0,$1,$2){
+            obj[$1]=$2
+
+    });
+        return obj
+    }
+    console.log(str.queryURLParameter())
+</script>
+</body>
+</html>

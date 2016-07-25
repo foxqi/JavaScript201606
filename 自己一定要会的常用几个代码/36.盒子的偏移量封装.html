@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        div{
+            padding:20px;
+        }
+        #div1{
+            width: 450px;
+            height: 450px;
+            border: 10px solid green;
+            margin:50px auto;
+        }
+        #div2{
+            width: 300px;
+            height: 300px;
+            border: 10px solid red;
+            position: absolute;
+        }
+        #div3{
+            width: 200px;
+            height: 200px;
+            border: 10px solid blue;
+        }
+    </style>
+</head>
+<body id="body">
+<div id="div1">
+    div1
+    <div id="div2">
+        div2
+        <div id="div3">
+            div3
+        </div>
+    </div>
+</div>
+<script>
+    //需求：求div3的结构父级，最大能到谁，用代码来实现
+    var oDiv3=document.getElementById('div3');
+    var oDiv2=document.getElementById('div2');
+   /* console.log(oDiv3.offsetLeft)
+    console.log(oDiv2.clientLeft)*/
+    //offset:求一个有定位的元素，到body的距离；{left:xxx,top:xxx}
+    function offset(curEle){
+        var l=curEle.offsetLeft;//先获取当前元素的外边框距离定位父级的内边框之间的距离；
+        var t=curEle.offsetTop;
+        var par=curEle.offsetParent;//获取第一个定位父级
+        while(par){//如果定位父级存在的情况下
+            //因为IE8每次会自动加上边框，所以我们只需要对IE8以外的浏览器单独加边框即可；
+            if(navigator.userAgent.indexOf('MSIE 8')===-1){
+                l+=par.clientLeft;//加上每个定位父级的border（边框）
+                t+=par.clientTop;
+            }
+            l+=par.offsetLeft;//加上每个定位父级的外边框距离他自己定位父级的内边框的距离
+            t+=par.offsetTop;
+            par=par.offsetParent;
+        }
+        return {left:l,top:t};
+    }
+console.log(offset(oDiv3).left)
+</script>
+</body>
+</html>

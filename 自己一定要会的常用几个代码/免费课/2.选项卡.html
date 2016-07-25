@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            -webkit-user-select:none;
+        }
+        ul{
+            list-style: none;
+        }
+        .tab{
+            width: 308px;
+            height: 200px;
+            margin-left: 200px;
+            clear: both;
+        }
+        .tab ul{
+            clear: both;
+        }
+        .tab ul li{
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            text-align: center;
+            background: red;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        .tab ul .bg{
+            background: greenyellow;
+        }
+        .tab div{
+            width: 100%;
+            height: 100%;
+            background: lightblue;
+            font-size: 50px;
+            display: none;
+
+        }
+        .tab .show{
+            display: block;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="tab" class="tab">
+    <ul>
+        <li class="bg">按钮1</li>
+        <li>按钮2</li>
+        <li>按钮3</li>
+    </ul>
+    <div class="show">内容一</div>
+    <div>内容二</div>
+    <div>内容三</div>
+
+
+
+</div>
+<script>
+//    var oTab=document.getElementById('tab');
+//    var oLi=oTab.getElementsByTagName('li');
+//    var oDiv=oTab.getElementsByTagName('div');
+//    for(var i=0;i<oLi.length;i++){
+//        oLi[i].index=i;
+//        oLi[i].onclick=function(){
+//            for(var i=0;i<oLi.length;i++){
+//                oLi[i].className='';
+//                oDiv[i].className='';
+//            }
+//            this.className='bg';
+//            oDiv[this.index].className='show';
+//        }
+//    }
+
+    var oTab=document.getElementById('tab');
+    var oLis=oTab.getElementsByTagName('li');
+    var oDivs=oTab.getElementsByTagName('div');
+    function tabchange(nIndex){
+     for(var i=0;i<oLis.length;i++){
+         oLis[i].className='null';
+         oDivs[i].className='null';
+     }
+
+        oLis[nIndex]='bg';
+        oDivs[nIndex]='show';
+        }
+      for(var i=0;i<oLis.length;i++){
+       oLis[i].onclick=function(){
+           tabchange(i)
+        }
+   }
+
+</script>
+</body>
+</html>

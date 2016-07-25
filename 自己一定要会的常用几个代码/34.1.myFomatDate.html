@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var strDate='2016-6-24 15:1:00';
+    var strTmp='{0}年{1}月{2}日 {3}时{4}分{5}秒';
+    //功能：strDate 最终替换为 str这个模板的形式
+    /*思路
+    * 1.把strDate变成数组 -match；
+    * 2.把str中匹配到的数字替换了模板；
+//    * */
+//    String.prototype.myFomatDate=function(str){
+//        var str=str||'{0}年{1}月{2}日 {3}时{4}分{5}秒';
+//        //1.把strCode字符串转成了数组
+//        var ary=this.match(/\d+/g);//split
+//        //2.用str这个模板中匹配到的数字作为数组的索引，取出数组对应项的内容，拿这个内容替换了模板中{n};
+//        return str.replace(/{(\d+)}/g,function($0,$1){
+//            var tmp=ary[$1];
+//            tmp=tmp>=0&&tmp<10?'0'+Number(tmp):tmp;
+//            return tmp;//返回已经匹配好的模板
+//        })
+//
+//    };
+//    console.log(strDate.myFomatDate(str))
+
+   /* String.prototype.myFomatDate=function(strTmp){
+        strTmp=strTmp||'{0}年{1}月{2}日 {3}时{4}分{5}秒';
+        var ary=this.match(/\d+/g);//把字符串里面的数字都匹配出来。以一个数组的形式返回["2016","6","24","15","1","0"]
+        return strTmp.replace(/{(\d)}/g,function(){
+            var tmp=ary[arguments[1]];//把小分组中拿到的数字作为数组的索引，拿到数字对应的值
+            tmp=tmp>0&&tmp<10?'0'+Number(tmp):tmp;
+            return tmp//replace的作用就是用第二个参数的返回值去替换第一个参数正则的捕获到内容
+        })
+    }
+    console.log(strDate.myFomatDate(strTmp))*/
+
+</script>
+</body>
+</html>

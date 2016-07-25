@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    /*封装Object.create（obj是obj2这个实例的原型）*/
+/* var obj={cc:function(){alert('cc')},dd:function(){}}
+ function myCreate(obj){
+ function A(){};
+ A.prototype=obj;
+ return new A;//要有值进行接收，如果没有那么对象模型就不知道要接收谁
+ }
+ function Fn1(){};//构造函数里放的是私有的属性和方法
+ Fn1.prototype=obj;//自己创建的原型对象（原型上放的是公有的属性和方法，但是这是自己创建的原型对象，一定没有constructor，不能进行类的细分，但是可以自己自己创建一个constructor：A））
+ var obj2=myCreate(obj);//设置obj2的原型是obj
+ function Fn2(){};//构造函数
+ Fn2.prototype=obj2;//自己创建的原型对象
+ var f1=new Fn2();//实例
+ console.dir(f1)*/
+/* var obj={cc:function(){alert('cc')},dd:function(){}}
+ function myCreate(obj){
+ function A(){};
+ A.prototype=obj;
+ return new A;
+ }
+ function Fn1(){};
+ Fn1.prototype=obj;
+ var obj2=myCreate(obj);
+ function Fn2(){};
+ Fn2.prototype=obj2;
+ var f1=new  Fn2;
+ console.dir(f1)*/
+
+   /*封装forEach（遍历数组中的每一项）用回调函数*/
+/*var ary=['zhu',123,'ss',35,88]
+ var obj={}
+ Array.prototype.myForEach=function(callback,context){
+ context=context||window;
+ //高级浏览器
+ //其实就是判断forEach在不知Array的公有属性里，如果在，那就直接用forEach，一定要return阻断程序判断，否则会一直判断
+ if('forEach'in Array.prototype){
+ this.forEach(callback,context);
+ return
+ }
+ //低级浏览器
+ //如果forEach不在里面，就要进行分析，被调用ary.length次，在判断callback是不是函数类型，是的话，就可以设置属性，但是设置的属性是window，但是我们设置的是obj的属性，所以要用call
+ for(var i=0;i<this.length;i++){
+ if(typeof callback==='function'){
+ callback.call(this[i],i,this)
+ }
+
+ }
+ }
+ ary.myForEach(function(item,index,input){
+ console.log(this)
+ },obj)*/
+ /*var ary=['zhuang','hua',23,55]
+   var obj={};
+   Array.prototype.myForEach=function(callback,context){
+   context=context||window;
+   if('forEach'in Array.prototype){
+   this.forEach(callback,context)
+   return
+   }
+   for(var i=0;i<ary.length;i++){
+   if(typeof callback==='function'){
+   callback.call(this[i],i,this)
+   }
+   }
+
+   }
+   ary.myForEach(function(item,index,input){
+   console.log(item)
+   },obj)
+   */
+
+   /*封装数组去重(链式操作)*/
+ /* var ary=[22,55,66,22,55,66];
+  //为什么能进行链式操作？因为每个方法调用后必须得有一个返回值，并且，这个返回值一定得是数组，才能继续通过点调用数组的其他方法；
+  Array.prototype.rmSame=function rmSame(){
+  var obj={}
+  for(var i=0;i<this.length;i++){
+  var cur=this[i]
+  if(obj[cur]===cur){
+  this.splice(i,1);
+  i--;
+  continue;
+  }
+  obj[cur]=cur;
+  }
+  return this
+  }
+  var res=ary.rmSame().reverse().sort(function(a,b){
+  return a-b;
+  }).pop()
+  console.log(ary)
+  console.log(res)*/
+ /* var ary=[55,66,22,33,55,66,123,22]
+   Array.prototype.rmSame=function rmSame(){
+   var obj={}
+   for(var i=0;i<this.length;i++){
+   var cur=this[i]
+   if(obj[cur]===cur){
+   this.splice(i,1)
+   i--;
+   continue;
+   }
+   obj[cur]=cur
+   }
+   return this
+   }
+   var rem=ary.rmSame().reverse().sort(function(a,b){return a-b}).pop()
+   console.log(ary)
+   console.log(rem)*/
+
+</script>
+</body>
+</html>

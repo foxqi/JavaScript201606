@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        div {
+            width: 306px;
+            margin: 20px auto 0;
+        }
+
+        div ul li {
+            width: 100px;
+            height: 50px;
+            border: 1px solid red;
+            float: left;
+            line-height: 50px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        div label {
+            display: inline-block;
+            margin-top: 10px;
+            width: 280px;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .bg {
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+<div id="div">
+    <ul>
+        <li>全选</li>
+        <li>不选</li>
+        <li>反选</li>
+    </ul>
+    <input type="checkbox"/><label for="">旅游</label>
+    <input type="checkbox"/><label for="">游泳</label>
+    <input type="checkbox"/><label for="">骑车</label>
+</div>
+
+<script>
+    var oDiv = document.getElementById('div');
+    var oLi = oDiv.getElementsByTagName('li');
+    var oInput = oDiv.getElementsByTagName('input');
+    var olabel = oDiv.getElementsByTagName('label');
+        oLi[0].onclick = function () {
+            for (i = 0; i < oInput.length; i++) {
+                oInput[i].checked = true;
+                olabel[i].className = 'bg';
+                }
+            }
+        oLi[1].onclick = function () {
+            for (i = 0; i < oInput.length; i++) {
+                oInput[i].checked = false;
+                olabel[i].className = '';
+            }
+        }
+        oLi[2].onclick = function () {
+            for (i = 0; i < oInput.length; i++) {
+                if (oInput[i].checked == true) {
+                    oInput[i].checked = false;
+                    olabel[i].className = '';
+                } else {
+                    oInput[i].checked = true;
+                    olabel[i].className = 'bg';
+                }
+            }
+        }
+    for (var a = 0; a < oInput.length; a++){
+        oInput[a].onclick = function () {
+            for (var a = 0; a < oInput.length; a++){
+                if (oInput[a].checked == true) {
+                    oInput[a].checked = true;
+                    olabel[a].className = 'bg';
+                } else {
+                    oInput[a].checked = false;
+                    olabel[a].className = '';
+                }
+            }
+        }
+    }
+</script>
+
+
+</body>
+</html>
