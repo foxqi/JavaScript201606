@@ -716,6 +716,20 @@ exec如果捕获到内容的话，会返回一个数组
 1.关于惰性思想：
   它是JS高级编程技巧之一，在一个不销毁的私有作用域中，定义一个变量，保存我们的判断浏览器的布尔值；
   以后在需要判断浏览器的时候，只需要使用这个变量即可；
+  例如在写utils库，单例模式的惰性思想，
+  var utils=(function(){
+      var flag='getComputedStyle' in window;
+       function getCss(curEle,attr){
+              var val,reg;
+              if(flag){
+                  val=getComputedStyle(curEle,false)[attr];
+              }else{
+                 .....
+          }
+      }
+      return {
+              getcss（）；
+              }
 2.滚动条样式
   scrollbar-face-color:#FEFAF1; (立体滚动条凸出部分的颜色)
   scrollbar-highlight-color:#FEFAF1; (滚动条空白部分的颜色)
