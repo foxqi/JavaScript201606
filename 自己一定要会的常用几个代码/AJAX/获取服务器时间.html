@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script charset="UTF-8" type="text/javascript" src="ajax.js"></script>
+<script charset="UTF-8" type="text/javascript">
+
+//    ->获取服务器时间
+        var xhr = new XMLHttpRequest;
+        xhr.open("head", "note.txt", true);
+        //->xhr.setRequestHeader:设置请求头信息 要在OPEN之后设置
+        xhr.setRequestHeader("zhufeng", "2016");
+        xhr.timeout = "1000";//->设置AJAX请求的超时时间
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 2) {
+                //->xhr.getResponseHeader:获取服务器的响应头信息
+                var time = xhr.getResponseHeader("Date");
+                console.log(new Date(time));
+            }
+        };
+        xhr.send(null);
+</script>
+</body>
+</html>

@@ -441,7 +441,7 @@ Boolean();
     clearInterval 可以关闭setTimeout(); 也可以关闭 setInterval();
     注意：我们一般都是成双成对的关闭；
 
-6)Math 常用方法
+6)Math 常用方法   （仅仅只是个对象）
     1.Math.random() 0-1之间的随机小数；不包含1；
     Math.random()*(m-n)+n; 求一定范围的随机数公式；
     2.Math.round() 四舍五入的整数

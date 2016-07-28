@@ -108,6 +108,30 @@ node
   ->NODE提供给JS很多新的方法 :http:createServer、fs.writeFileSync、fs.readFileSync...
   ->NODE是基于事件驱动的/异步编程（我们在NODE环境下的编写的JS程序一般都是异步编程程序）
 
+      1）fs.writeFile()  。
+          语法：
+          复制代码 代码如下:
+
+          fs.writeFileSync(filename, data, [options])
+          由于该方法属于fs模块，使用前需要引入fs模块（var fs= require(“fs”) ）
+          接收参数：
+          filename      (String)            文件名称
+          data        (String | Buffer)    将要写入的内容，可以使字符串 或 buffer数据。
+          options        (Object)           option数组对象，包含：
+          · encoding   (string)            可选值，默认 ‘utf8′，当data使buffer时，该值应该为 ignored。
+          · mode         (Number)        文件读写权限，默认值 438
+          · flag            (String)            默认值 ‘w'
+
+       2）fs.readFile() 。
+          语法：
+          复制代码 代码如下:
+
+          fs.readFileSync(filename, [encoding])
+          由于该方法属于fs模块，使用前需要引入fs模块（var fs= require(“fs”) ）
+          接收参数：
+          filename    文件路径
+          options      option对象，包含 encoding，编码格式，该项是可选的。
+
 3.如何让JS代码在NODE中执行？
   ->利用webStorm嵌入了NODE的机制，直接把编写的JS通过右键“Run xxx.js”在NODE环境中执行（不建议经常这样使用，因为有些时候会有缓存）
 
@@ -170,3 +194,65 @@ node
       //->当服务创建成功，并且端口号也监听成功之后执行这个回调函数
       console.log("server is create success,listening on 80 port!");
   });
+
+7.Sync:同步
+  aSync:异步步
+
+
+8.MIME类型
+ 每一种资源文件都有自己的标识类型，例如;HTML文件的MIME类型是“text/html”
+ CSS文件的MIME类型是“text/css”
+ TXT文件的MIME类型是“text/plain”
+
+ 浏览器会按照代码的的MIME类型进行渲染
+
+9.如果大家连接的是同一个wifi，那么大家都在同一个局域网下，每个人的IP是不一样的
+ A同学的IP：192.168.1.13  他把自己的电脑当做服务器用刚才编写的代码创建了服务（80），其他同学都可以通过   192.168.1.13:80/index.html 访问到A同学发布的项目
+ A同学需要把自己电脑的防火墙（在控制面板-》windows防护墙->打开或关闭防护墙->全部关闭）
+
+10.HTTP报文：客户端传递个服务器端的内容 和 服务器传递给客户端的内容 都属于HTTP报文
+
+  ->起始行：请求起始行 响应起始行
+  ->首部：请求首部 响应首部 通用首部（请求和响应都有的） 自定义首部
+  ->主体：请求主体，响应主体
+
+11.
+[Request Headers ]（view source）
+
+      GET /index.html HTTP/1.1  ->请求起始行 HTTP METHOD（请求方式）、请求的地址、使用的HTTP传输协议的版本号
+
+      //下面这些都是  请求首部 ，全是传递给服务器的
+      ->请求首部：客户端会把一些信息放在请求首部中传递给服务器端，服务器端就可以在请求首部中获取到相关的信息（客户端设置 服务器获取）
+      Host: localhost:1234
+      Connection: keep-alive
+      Cache-Control: max-age=0
+      Upgrade-Insecure-Requests: 1
+      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64)  （当前客户端使用的浏览器的相关信息 ）AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36
+      Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+      Accept-Encoding: gzip, deflate, sdch
+      Accept-Language: zh-CN,zh;q=0.8
+      Cookie: Hm_lvt_3c8ecbfa472e76b0340d7a701a04197e=1469515800,1469519564,1469522580,1469586894; Hm_lpvt_3c8ecbfa472e76b0340d7a701a04197e=1469589261
+
+
+[Response Headers] （view source）
+    ->响应起始行：HTTP版本号、响应的状态码，状态码的说明
+    HTTP/1.1 200 OK
+    ->响应首部：服务器端传递给客户端的一些信息可以放在响应首部中，客户端可以在响应首部中偶去到服务器的相关信息（服务器设置 客户端获取）
+    content-type: text/html;charset=utf-8   响应内容的格式和编码
+    Date: Wed, 27 Jul 2016 03:51:15 GMT   服务器当前本次响应的时间（服务器时间格里尼治时间）
+    Connection: keep-alive
+    Transfer-Encoding: chunked
+
+[Response] 响应主体   服务器传递给客户端的数据内容都在响应主体中，客户端可以在响应的主体中获取到这些内容（服务器端设置 客户端获取）
+
+[Request payload] 请求主体  客户端传递给服务器端的内容，放在请求主体中传递给服务器，服务器可以在请求主体中获取到传递进来的内容
+
+
+客户端传递给服务器端数据：
+    ->请求URL后面问号传参的方式传递给服务器  /getList?name=zhufeng&&age=7;
+    ->设置请求的首部（设置请求头信息）
+    ->设置请求主体，把传递给服务器的内容放在请求主体中传递给服务器
+
+服务器端传递给客户端数据：
+     ->设置响应头信息
+     ->设置响应主体内容
