@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: 'ajax.html',
+                data: 'a=1',
+                method: 'get',
+                headers: {'zhufeng': '123'},
+                dataType: 'text',
+                async: true,
+                cache: false,
+                username: 'zhangyatao',
+                password: '123456',
+                beforeSend: function () {
+                    console.info('beforeSend');
+                },
+                complete: function () {
+                    console.warn('complete');
+                },
+                success: function (data) {
+                    console.log(data);
+//                    console.log('success:', data)
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+            });
+
+            /**
+             * 发送最简单的get请求
+             */
+            $.get('url', 'data', function () {
+
+            }, 'dataType');
+
+            /**
+             * 只发送最简单的post请求
+             */
+            $.post('url', 'data', function () {
+
+            }, 'dataType');
+
+            /**
+             * 使用get方法 并且将dataType设置为json
+             * 相当于$.get('url','data',function(){},'json');
+             */
+            $.getJSON('url', 'data', function () {
+            });
+
+            /**
+             * 使用get方法 并且将dataType设置为script
+             * 相当于$.get('url','data',function(){},'script');
+             */
+            $.getScript('url', 'data', function () {
+            });
+        })
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

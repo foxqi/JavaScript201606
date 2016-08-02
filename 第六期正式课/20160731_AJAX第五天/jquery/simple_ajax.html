@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script>
+        $(function () {
+
+            /*
+             $.get('test.txt', /!*'a=1',*!/ function (data) {
+             console.log(data)
+             }/!*, 'text'*!/);
+             */
+
+            /*
+             $.post('test.txt', {name: 'zhangyatao'}, function (data) {
+             console.log(data)
+             })
+             */
+
+//            $.getJSON('test.txt', function (data) {
+//                console.log(data);
+//            });
+
+            $.getScript('test.txt', function (data) {
+                console.log('script');
+            })
+
+
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

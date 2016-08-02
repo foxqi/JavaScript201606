@@ -1,0 +1,2 @@
+// 该页面使用localhost:12345/crossDomain来请求
+console.log('HELLO CROSS DOMAIN');

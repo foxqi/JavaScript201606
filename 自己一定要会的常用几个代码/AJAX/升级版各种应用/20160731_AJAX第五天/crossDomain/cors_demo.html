@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        function getCORS() {
+            if (window.XDomainRequest) {
+                return new XDomainRequest();
+            }
+            var xhr = null;
+            if (window.XMLHttpRequest && (xhr = new XMLHttpRequest()).withCredentials !== void 0) {
+                return xhr;
+            }
+            throw new Error('当前浏览器不支持跨域资源共享')
+        }
+
+        var cors = getCORS();
+
+        cors.open('get', 'http://localhost:12345/cors', true);
+
+        cors.onload = function () {
+            if (cors.status === 200) {
+                console.log(cors.responseText)
+            }
+        };
+        cors.send();
+    </script>
+</head>
+<body>
+http://localhost:63342
+</body>
+</html>

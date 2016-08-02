@@ -7,8 +7,8 @@ var http=require('http'),
 //创建一个服务
 var server1=http.createServer(function(req,res){
     //解析客户端请求地址中的文件目录名称，以及传递给服务的数据内容
-    var urlObj=url.parse(req.url,true);
-    pathname=urlObj['pathname'];
+    var urlObj=url.parse(req.url,true),
+    pathname=urlObj['pathname'],
     query=urlObj['query'];
 
 //低级浏览器
@@ -49,23 +49,11 @@ var server1=http.createServer(function(req,res){
 
 }
 
-//高级浏览器
-    //如果客户端请求的资源文件不存在，我们不加try catch服务会终止，这样不好，所有我们添加try catch异常捕获信息，这样即使不存在，服务有不会报错，同样也不会终止
-
-    try{
-        var con=fs.readFileSync("."+pathname,"utf-8");
-        res.end(con);
-    }catch(e){
-      res.end('request file is not find')
-    }
-
-
-
 });
 //为当前的这个服务配置端口
 server1.listen(1234,function(){
    console.log('server is success,listening on 1234 port!')
-})
+});
 
 
 

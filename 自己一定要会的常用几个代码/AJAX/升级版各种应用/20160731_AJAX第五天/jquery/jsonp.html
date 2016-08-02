@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>jquery下使用jsonp</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: 'http://suggestion.baidu.com/su',
+                data: {wd: 'zhufengpeixun'},
+                dataType: 'jsonp',
+                jsonp: 'cb', //jsonpcallback
+                success: function (data) {
+                    console.log(data)
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

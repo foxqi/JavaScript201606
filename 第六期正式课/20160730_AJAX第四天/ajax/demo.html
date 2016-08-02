@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', '../info.txt', false, 'zhangyatao', '123456');
+
+        // 自定义请求首部 低版本ie不可用
+        xhr.setRequestHeader('zhangyatao', '1');
+        xhr.setRequestHeader('zhangyatao', '2');
+
+        // 重写http响应中的MIME Type
+        xhr.overrideMimeType('application/json');
+        // 设置请求的MIME Type
+        xhr.setRequestHeader('Content-Type', 'asdf/asdf');
+
+        console.log('before send');
+
+        setTimeout(function () {
+            xhr.send();
+        }, 0);
+
+
+        console.log('after send');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === xhr.DONE && this.status === 200) {
+
+
+                console.log('response');
+                // 获取指定响应首部 低版本ie不可用
+                var date = xhr.getResponseHeader('date');
+                console.log('服务器时间为', new Date(date));
+                var allHeaders = xhr.getAllResponseHeaders();
+                console.log('获取所有响应首部', allHeaders);
+            }
+        };
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                // 默认为true 是否为异步请求
+                async: true,
+                // 在调用ajax对象的send方法,执行此函数
+                beforeSend: function (xhr, settings) {
+                    // 显示loading效果
+                },
+                // 是否缓存该请求 默认为true,
+                // 当dataType为script和jsonp时  cache默认为false
+                cache: true,
+                // 不管ajax成功还是失败都会执行此函数
+                complete: function (xhr, stateText) {
+                    // 隐藏loading效果
+                    console.log(this)
+                },
+                // 请求的MIME Type
+                // 默认为表单提交
+                // 当该参数设置为false时,则使用浏览器默认MIME Type
+                // 当data为FormData时, 该参数一定要设置为false
+                contentType: 'application/x-www-form-urlencoded',
+                // beforeSend complete success error这四个函数中上下文对象
+                context: window,
+                // 请求的参数
+                // 可以使用四种类型 string object array FormData
+                data: '',
+                // 格式化服务器返回的数据
+                /**
+                 * text  会将响应主体转为字符串 默认值
+                 * json 会将响应主体转为json对象
+                 * html 会将响应主体转为html元素
+                 * xml 会将响应主体转为xml文档
+                 * jsonp 会发送jsonp请求
+                 * script 会将响应主体转为script脚本
+                 */
+                dataType: 'text',
+                // ajax执行失败时 会执行此函数
+                // 1 ajax失败
+                // 2 格式化服务器返回的数据失败
+                // 3 请求超时
+                error: function (xhr, statusText, err) {
+
+                },
+                // 设置自定义请求首部
+                headers: {},
+                // http方法 默认为get请求
+                // jquery版本1.9.0之前 使用type参数 1.9(包含1.9)之后使用method参数
+                method: 'get',
+                // 重写服务器响应的MIME Type
+                mimeType: 'application/json',
+                password: '12314',
+                username: 'zhufeng',
+                // 是否将参数格式化为querystring
+                // 默认true
+                // @warn 当参数为FormData,该参数一定要设置为false,
+                // contentType同样也许设置为false
+                processData: true,
+                // ajax成功时 会执行此函数
+                success: function (data, statueText, xhr) {
+                    // data为经过dataType转化后的数据
+                    console.log(data);
+                },
+                // 指定超时时间(单位:毫秒),默认为0 表示不执行超时逻辑
+                // 经过3秒之后,还没有收到http响应,则认为超时,执行error函数
+                timeout: 3000,
+                // ajax请求的服务器地址
+                // 默认为 "/"根目录
+                url: '/'
+            });
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

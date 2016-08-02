@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <script>
+        function loadScript(src, callback) {
+            if (typeof src !== 'string') {
+                callback(new TypeError('参数错误'));
+            }
+            var script = document.createElement('script');
+            script.async = 'async';
+            script.src = src;
+            document.body.appendChild(script);
+
+            script.onload = function () {
+                callback();
+            };
+
+            script.onerror = function (ex) {
+                callback(ex);
+            }
+        }
+
+
+        $(document).ready(function () {
+            console.log('ready')
+        });
+
+        window.onload = function () {
+            console.log('onload')
+            loadScript('../lib/ajaxaaa.js', function () {
+                console.log('ajax loaded')
+            });
+        };
+        var ready = (function () {
+            var pageLoaded = false;
+            if (window.addEventListener) {
+                return function (callback) {
+                    if (pageLoaded || document.readyState === 'complete') {
+                        callback();
+                        return;
+                    }
+                    window.addEventListener('DOMContentLoaded', function () {
+                        pageLoaded = true;
+                        callback();
+                    }, false);
+                }
+            } else {
+                // 只要对象存在onreadystatechange  肯定会存在readyState属性
+                /**
+                 * document.readyState
+                 * loading html文档正在加载
+                 * interactive 仅仅只是DOM结构已经加载完成
+                 * complete html全部资源加载完成
+                 */
+                return function (callback) {
+                    if (pageLoaded || document.readyState === 'complete') {
+                        callback();
+                        return;
+                    }
+                    document.onreadystatechange = function () {
+                        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                            document.onreaystatechange = null;
+                            pageLoaded = true;
+                            callback();
+                        }
+                    }
+                }
+
+
+            }
+        })();
+
+        ready(function () {
+            console.log('my ready');
+        });
+        //
+        //        loadScript('',function(){
+        //            console.log('script loaded');
+        //        })
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

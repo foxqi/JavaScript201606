@@ -520,6 +520,10 @@ function myCreate(obj){
 1.正则由两部分组成：元字符+修饰符
   元字符：代表特殊意义的元字符 和 代表次数的量词元字符：
     1）特殊含义的元字符
+        \ 转义
+        | 或
+        () 分组
+        . 除了\n以外的其他任意字符
         \n 换行元字符（在控制台换行）
         \b 单词边界，开头结尾和空格 'w1       w2 w3'
         ^ 开头
@@ -1287,6 +1291,9 @@ e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
 
          1.JSON.parse(jsonStr);jsonStr:json格式的字符串 功能：把JSON格式的字符串转成JSON格式的数据；
         2.JSON.stringify(jsonObj) 把JSON格式的数据转成JSON格式的字符串；
+
+
+
 3.写JS的顺序
     1）HTML+css一定先写好（用的假数据）
     2）写JS：不是写代码，而是写思路
@@ -1299,7 +1306,7 @@ e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
         //当try里面的语句不能正常执行的时候，走的是catch里面的语句；
         console.log(e)//打印出错误原因
     }finally{//finally里面的语句，是无论try能否正常执行，都会走finally；所以，finally基本不用；
-        console.log(111)
+        console.log(111)}
 6.三种绑定数据的思路及DOM回流
     DOM回流：当页面中的HTML发生变化的时候，会对页面中的所有内容都重新渲染；
     思路1：字符串拼接

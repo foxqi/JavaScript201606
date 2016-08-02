@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>hao123</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            text-align: center;
+            margin: 0 auto;
+            width: 400px;
+            background: #ccc;
+            border: 1px solid saddlebrown;
+        }
+
+        .dropbox {
+            position: relative;
+        }
+
+        .container #search {
+            width: 200px;
+        }
+
+        .dropbox ul {
+            background: #fff;
+            border: 1px solid seagreen;
+            text-align: left;
+            list-style: none;
+            width: 200px;
+            position: absolute;
+            left: 103px;
+        }
+
+        .dropbox ul li {
+            background-color: beige;
+            cursor: pointer;
+        }
+
+        .dropbox ul li:nth-child(odd) {
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <label> 百度一下 <input id="search" type="search"> </label>
+    <input id="searchBtn" type="button" value="百度搜索">
+
+    <div class="dropbox">
+        <ul id="search-list">
+
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<script src="../lib/jsonp.js"></script>
+<script>
+    function BaiduSearch() {
+        this.node = {
+            searchText: '#search',
+            searchBtn: '#searchBtn',
+            list: '#search-list'
+        };
+        // word = wd
+        // http://suggestion.baidu.com/su?wd=a&cb=xxx;
+        this.api = 'http://suggestion.baidu.com/su';
+        this.init();
+    }
+    BaiduSearch.prototype = {
+        constructor: BaiduSearch,
+        init: function () {
+            for (var n in this.node) {
+                if (!this.node.hasOwnProperty(n)) continue;
+                this.node[n] = document.querySelector(this.node[n]);
+            }
+            this.bindEvent();
+        },
+        bindEvent: function () {
+            var that = this;
+            that.node.searchBtn.onclick = function () {
+                var searchText = that.node.searchText.value;
+                that.callBaiduSearch(searchText);
+            };
+            that.node.list.onclick = function (e) {
+                e || (e = window.event);
+                var target = e.target || e.srcElement;
+                // 打开一个新页面
+                window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(target.innerHTML), '_blank');
+
+                e.stopPropagation();
+                e.cancelBubble = true;
+            };
+
+            document.body.onclick = function () {
+                that.node.list.innerHTML = '';
+            }
+        },
+        callBaiduSearch: function (searchText) {
+            if (!searchText) {
+                return;
+            }
+            var that = this;
+            jsonp(this.api, {wd: searchText}, 'cb', function (data) {
+                if (data.s.length) {
+                    var fragement = document.createDocumentFragment();
+                    for (var i = 0, len = data.s.length; i < len; i++) {
+                        var li = document.createElement('li');
+                        li.innerHTML = data.s[i];
+                        fragement.appendChild(li);
+                    }
+                    that.node.list.innerHTML = '';
+                    that.node.list.appendChild(fragement);
+                }
+            });
+        }
+    };
+
+    new BaiduSearch();
+</script>

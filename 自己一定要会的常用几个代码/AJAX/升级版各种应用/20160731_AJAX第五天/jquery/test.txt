@@ -1,0 +1,10 @@
+hello world
+
+jquery操作ajax提供了5种方法
+
+$.ajax
+
+$.get
+$.post
+$.getJSON
+$.getScript

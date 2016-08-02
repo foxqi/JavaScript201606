@@ -1,0 +1,75 @@
+跨域
+
+同域请求
+页面中所有ajax请求url中的scheme hostname port与当前宿主页面url中的scheme hostname port都一样的请求就叫同域请求
+
+跨域请求
+页面中所有的ajax请求url中的scheme hostname port和当前宿主页面url中的scheme hostname port有任何一个不一样,就叫做跨域请求
+
+http://pan.baidu.com
+http://www.baidu.com
+
+同源策略
+same origin policy
+
+同源策略是一种约定,它规定了javascript可以在哪些地方执行.是浏览器厂商强制添加的一种安全限制.
+
+同源策略的存在极大的限制了很多跨域操作.
+
+a.com/userinfo 用户信息
+
+如何绕过同源策略来完成一个跨域请求?
+
+html不受同源策略限制的元素:script img iframe
+
+script和img 会把加载过来的内容强制转换为指定内容
+iframe 虽然可以正确加载内容,但是无法进行操作
+
+为什么利用script标签实现的跨域方式叫做jsonp?
+因为返回的数据格式为 functionName(JSON DATA); => JSON pading a function name => JSON pading => jsonp
+
+
+jsonp的特点:
+1 是用来解决跨域请求
+2 利用script不受同源策略限制并且会把加载过来的内容强制当成js来执行
+3 必须提前声明一个全局函数,这个全局函数的作用:及时获取服务器返回的数据,可以在这个函数里处理服务器返回的数据.
+4 必须和server商定一个用来跨域接收数据全局函数名的querystring,这个querystring有一个专属名称jsonpcallback
+
+jsonp的注意事项:
+1 因为jsonp是通过script的src属性去加载的,所以jsonp只能是get方法请求
+2 服务器返回的数据必须满足 "functionName(json data)" 这种格式,只要不满足,就不是jsonp接口.
+3 jsonp接口必须存在一个jsonpcallback,如果不存在,就不是jsonp接口
+
+
+
+
+另外一种高效跨域方式:跨域资源共享
+
+CORS(cross origin resource sharing)
+
+兼容性 ie8+
+
+通过浏览器提供的API实现的跨域
+
+标准浏览器:XMLHttpRequest
+ie:XDomainRequest
+
+
+cors的特点:
+1 需要server添加一个响应首部Access-Control-Allow-Origin ,该首部有两个类型的值 "*" "指定域名"
+
+jsonp和cors的相同点和不同点:
+
+相同点:
+1 都是进行跨域请求访问的
+2 都是接口级别跨域(不是页面级别跨域)
+3 都需要server端配合(只要是跨域都需要server配合,否则无法完成跨域请求)
+
+不同点:
+1 jsonp只能是get方法,而cors则是get put delete head post这个方法都可以使用
+2 jsonp没有浏览器兼容性,而cors则是ie8+
+3 jsonp使用script来实现过,而cors是通过浏览器提供的API来实现
+
+为什么jsonp不是ajax?
+答:ajax是通过浏览器提供操作http的API来实现请求的.而jsonp是通过script来实现的请求.所以jsonp不是ajax
+

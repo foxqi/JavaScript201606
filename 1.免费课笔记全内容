@@ -721,7 +721,7 @@ Boolean();
     循环中，如果有点击事件，触发一个函数，函数中一定不能直接用i；因为，此时，循环早已经结束，i已经是最大值；
     （也可以用闭包）
 *******************************************************************************************************
-第七类  各种思路分析
+第八类  各种思路分析
 1.选项卡思路分析
 思路分析：
     1.拿到li上正确的索引：因为我要通过索引来把按钮和内容关联起来；
@@ -745,7 +745,7 @@ Boolean();
           思路分析：
               1.display:none -display:block
               2.opacity:0 --opacity:1; opacity是有兼容问题，filter处理兼容
-              3.visibility: hidden --visible;
+              3.visibility: hidden --visible;（能见度：隐藏--显示）
               4.marginLeft/marginTop/marginBottom/marginRight..
               5.left/top..
 

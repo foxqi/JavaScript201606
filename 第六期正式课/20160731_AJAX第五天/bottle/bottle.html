@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            width: 300px;
+            overflow: hidden;
+            margin: 0 auto;
+            text-align: center;
+            font-family: sans-serif;
+            color: #fff;
+        }
+
+        #sea {
+            height: 200px;
+            background: lightseagreen;
+            width: 300px;
+            text-align: left;
+        }
+
+        /*#letter */
+    </style>
+    <script src="../lib/ajax.js"></script>
+</head>
+<body>
+<div id="container">
+    <div id="sea"></div>
+    <button id="getBottle">捡瓶子</button>
+    <button id="throwBottle">扔瓶子</button>
+    <br/>
+    <textarea rows="3" id="letter"></textarea>
+</div>
+
+</body>
+</html>
+<script>
+    /**
+     * 漂流瓶服务
+     * @return {BottleService}
+     * @constructor
+     */
+    function BottleService() {
+        // 判断上下文是否为当前实例,如果不是重新实例化
+        if (!(this instanceof BottleService)) {
+            return new BottleService();
+        }
+        // html元素节点信息
+        this.node = {
+            sea: '#sea',
+            getBottle: '#getBottle',
+            throwBottle: '#throwBottle',
+            letter: '#letter'
+        };
+        // 接口信息
+        this.api = {
+            getBottle: '/getDriftingBottle',
+            throwBottle: '/throwDriftingBottle'
+        };
+        // 进行初始化
+        this.init();
+    }
+    BottleService.prototype = {
+        constructor: BottleService,
+        init: function () {
+            // 循环节点信息 得到节点
+            for (var n in this.node) {
+                if (!this.node.hasOwnProperty(n)) continue;
+                this.node[n] = document.querySelector(this.node[n]);
+            }
+            // 绑定事件
+            this.bindEvent();
+        },
+        bindEvent: function () {
+            var that = this;
+            // 绑定捡瓶子事件
+            this.node.getBottle.onclick = function () {
+                console.log(this);
+                that.interactiveBottle('get', that.api.getBottle, '', function (data) {
+                    if (data.errno !== 0) {
+                        alert('稍后再捡瓶子')
+                    } else {
+                        var content = data.content;
+                        var date = new Date(content.date);
+                        that.node.sea.innerHTML = '恭喜你捡到瓶子:<br/>内容:'
+                                + content.content
+                                + '<br/>时间:' + date.toLocaleDateString() + date.toLocaleTimeString();
+                    }
+                });
+            };
+            // 绑定扔瓶子事件
+            this.node.throwBottle.onclick = function () {
+                var val = that.node.letter.value;
+                if (val) {
+                    that.interactiveBottle('post', that.api.throwBottle,
+                            {content: val}, function (data) {
+                                if (data.errno !== 0) {
+                                    alert('漂流瓶没扔出去');
+                                } else {
+                                    alert('瓶子扔出去了')
+                                    that.node.letter.value = '';
+                                }
+                            });
+                }
+
+            }
+        },
+        interactiveBottle: function (method, url, data, callback) {
+            // 处理ajax逻辑
+            ajax({
+                url: url,
+                data: data,
+                method: method,
+                dataType: 'json',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    callback(data);
+                },
+                error: function (err) {
+                    alert('捞瓶子失败');
+                }
+            })
+        }
+    };
+    BottleService.start = function () {
+        BottleService();
+    };
+    window.onload = function () {
+        BottleService.start();
+    }
+</script>

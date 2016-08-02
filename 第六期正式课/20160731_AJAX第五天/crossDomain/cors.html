@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>跨域资源共享</title>
+    <script>
+        /**
+         * ie10+ chrome firefox safari opera
+         * @type {XMLHttpRequest}
+         */
+        var xhr = new XMLHttpRequest();
+        if (xhr.withCredentials !== void 0) {
+            console.log('当前浏览器支持cors');
+        }
+
+        /**
+         * IE8 IE9
+         * @type {XDomainRequest}
+         */
+        var ie = new XDomainRequest();
+
+
+        function getCORS() {
+            if (window.XDomainRequest) {
+                return new XDomainRequest();
+            }
+            var xhr = null;
+            if (window.XMLHttpRequest && (xhr = new XMLHttpRequest()).withCredentials !== void 0) {
+                return xhr;
+            }
+            throw new Error('当前浏览器不支持跨域资源共享')
+        }
+
+        // step1 获取cors对象
+        var cors = getCORS();
+
+        // step 2 调用open方法
+        cors.open('http method', 'request URI', true, 'username', 'password');
+
+        // step 3 获取响应
+        // 当http事务完成之后,会主动执行onload事件 相当于readyState等于4的时候
+        cors.onload = function () {
+            if (/^2\d{2}$/.test(cors.status)) {
+                // 获取响应主体
+                console.log(cors.responseText);
+                console.log(cors.responseXML);
+            }
+        };
+
+        // step 4 调用send方法
+        // 会把参数放入请求主体中
+        cors.send();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

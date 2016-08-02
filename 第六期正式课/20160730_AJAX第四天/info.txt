@@ -1,0 +1,197 @@
+URL 统一资源定位符
+URN 统一资源名称
+URI 统一资源标识符
+
+hsts 强制使用https协议
+
+querystring格式
+?KEY1=VALUE1&KEY2=VALUE2...
+
+URL的格式:
+<*scheme>://<username>:<password>@<*hostname>:<*port><pathname>?<querystring>#<hash>
+URL符号 :/@?#=&
+
+DNS解析
+域名名称服务
+Domain Naming Service
+把域名解析为ip地址
+
+如果url中没有指定端口,则使用url方案的默认端口.
+
+http 80
+https 443
+ftp 21
+
+
+http只管传输无法负责链接.
+
+网络七层协议
+1 物理层 网卡
+2 链路层 网卡驱动
+3 网络层 ip地址
+4 传输层 tcp udp 3次握手 4次挥手
+5 会话层 保持会话 断开会话 操作系统维护
+6 表示层 加密 解密
+7 应用层 http https ftp smtp telnet curl
+
+http协议包含tcp协议 连接服务器使用tcp去连接
+
+http协议
+超文本传输协议
+
+负责传输http客户端和http服务器之间的数据.
+
+
+http协议是一个事务 一个事务包含n+1个事件,只要这些事件中有一个失败,那么这个事务就失败.只有这个事务中的所有事件都成功,那么这个事务才算成功.
+
+http协议包含两个事件
+请求和响应
+
+有固定顺序 先有"请求"后有"响应"
+
+请求和响应的内容,统称为"报文"
+
+报文分为三部分
+1 起始行
+请求或者响应报文的第一行
+摘要信息
+
+请求起始行 (发送到服务器)
+ http方法 请求路径 http版本号
+响应起始行 (发送到浏览器)
+ http版本号(必须和请求的版本号一一对应) 服务器状态码 服务器状态码描述符
+
+2 首部
+附属信息
+
+请求首部 cookie(*)
+响应首部 date content-length
+通用首部 content-type
+实体首部 扩展首部
+
+3 主体
+数据的承载
+
+http方法
+表示该http如何发送数据
+
+get 从服务器获取资源
+1 没有请求主体 (因为get是从服务器获取资源,不需要设置请求主体,所以get方法没有请求主体)
+2 发送的数据有大小限制 (因为没有请求主体,只能把请求参数放入querystring,会造成url长度增加.但是浏览器对url的长度有大小限制ie 2k chrome 8k firefox 7k,所以get方法发送的数据有大小限制)
+3 容易被浏览器缓存(节省带宽) 304缓存 和 强缓存
+如何解决强缓存?
+在url后拼接随机字符串,让url每次都不一样,这样就不会命中浏览器的强缓存.
+4 明文发送
+
+delete 告诉服务器删除一段资源
+特点和get方法一样
+成功的http状态码为202 不是200
+
+head 获取http响应起始行和首部 (不包含主体)
+特点和get方法一样
+响应报文中没有响应主体
+请求主体和响应主体都不存在
+
+post 往服务器发送资源
+1 有请求主体(因为post方法目的是往服务器发送数据,而且数据的大小是未知的.所有的数据都可以放到请求主体中)
+2 没有大小限制(因为请求主体没有大小限制)
+3 不会被浏览器缓存
+4 可以不是明文发送(因为可以把数据放入querystring中,也可以放入请求主体)
+5 一般用来发送数据量较大的数据(文件上传),或者不愿被看见的数据(账号密码)
+
+put 往服务器推送资源
+特点和post一样
+成功的http状态码为202,不是200
+
+让各个方法各司其职
+增删改查(CURD)
+
+增加 post
+删除 delete
+修改 put
+查询 get
+
+这种实现,就是server端接口的软件架构,叫Restful(表征状态转移)
+
+处理学生列表的接口 /rest/1.0/userinfo
+
+增加一个学生 POST /rest/1.0/userinfo {name:'xiaozhang',age:32}
+删除id为1的学生 delete /rest/1.0/userinfo?id=1
+修改id为1的学生 put /rest/1.0/userinfo?id=1 {name:'xiaozhang,age:18}
+查询id为个学生 get /rest/1.0/userinfo?id=1
+查询所有学生 get /rest/1.0/userinfo
+
+angularjs 提供了restful服务 $resource
+
+http 状态码
+状态码是放在响应起始行中,所以收到状态码肯定会通过服务器,然后服务器返回.
+
+表示服务器对该请求的处理结果
+1xx http正在初始化
+100 初始化
+101 切换协议 websocket
+
+2xx 客户端请求成功
+202 ok 成功
+202 accepted 接受
+
+3xx 重定向和缓存
+301 永久转移
+服务器控制站点之间跳转 360buy.com -> jd.com
+使用301会降低搜索引擎的权重(只要请求时该网站时返回301,跳转到其他网站,说明这个网站已经被废弃,所以搜索引擎会认为这个网站是无效网站,直接降低搜索权重)
+302 临时转移
+一般用于临时性跳转  登录功能
+304 未改变(缓存) 304的缓存会每次去服务器校验
+last-modifed if-modified-since 文件最后一次修改的时间
+etag if-none-match 文件的实体标签
+
+强缓存 不回去服务校验
+涉及到强缓存的两个响应首部
+cache-control 缓存多少秒
+expire 缓存到指定时间
+
+4xx 客户端请求错误
+400 错误的请求
+请求参数错误 url长度超过server限制 端口错误 协议错误
+401 未认证 没有登录网站
+403 禁止访问 没有权限
+404 未找到
+
+5xx 服务器处理错误
+500 服务器内部错误
+503 服务器不可用
+
+MIMEType
+多用途因特网邮件扩展
+
+作用:表示请求或者响应数据的类型,浏览器或者服务器根据该类型去进行处理.
+
+MIME在http协议中通过通用首部content-type来表示
+
+html text/html
+css text/css
+js text/js || application/javascript || application/x-javascript
+png image/png
+jpg image/jpeg
+gif image/gif
+json application/json
+binary applicaiton/octect-stream
+表单提交 application/x-www-form-urlencoded
+
+格式 : 大类型/小类型
+
+
+AJAX
+异步JavaScript和xml
+
+处理兼容性:
+1 优雅降级
+2 渐进增强
+
+ajax通过浏览器提供的API和http服务器进行交互
+
+
+ajax同步请求
+在http事务完成之前,send方法后面执行逻辑会被阻塞,当http事务完成之后,send方法后面的逻辑继续执行
+ajax异步请求
+在http事务完成之后,send方法后面的执行逻辑不会被阻塞.
