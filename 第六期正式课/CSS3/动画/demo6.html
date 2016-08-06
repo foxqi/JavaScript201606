@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .container{
+            width: 100%;
+            height: 100%;
+        }
+        .container>img{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+        .container ul{
+            width: 100%;
+            position: absolute;
+            bottom:10%;
+            text-align: center;
+            z-index: 15;
+        }
+        .container ul li{
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            border:10px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .container ul li img{
+            width: 100%;
+            height: 100%;
+        }
+        :target{ /*表示所有目标元素都会起作用*/
+            z-index: 10;
+        }
+
+        @keyframes slideLeft {
+             0%{
+                 transform: translate(-500px);
+             }
+             100%{
+                 transform: translate(0px);
+             }
+         }
+        @keyframes slideTop {
+            0%{
+                transform: translate(0,-500px);
+            }
+            100%{
+                transform: translate(0px,0px);
+            }
+        }
+
+        @keyframes zoomIn {
+            0%{
+                transform: scale(0.2);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+        @keyframes zoomOut {
+            0%{
+                transform: scale(2);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+        @keyframes rotate {
+            0%{
+                transform: scale(0.2) rotate(0deg);
+            }
+            100%{
+                transform: scale(1) rotate(360deg);
+            }
+        }
+        #bg1:target{  /*指定了id名是bg1的目标元素才执行下面的动画*/
+            animation: slideLeft 1s ;
+        }
+        #bg2:target{
+            animation: slideTop 1s ;
+        }
+        #bg3:target{
+            animation: zoomIn 1s ;
+        }
+        #bg4:target{
+            animation: zoomOut 1s ;
+        }
+        #bg5:target{
+            animation: rotate 1s ;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="img/1.jpg" alt="" id="bg1"/>
+    <img src="img/2.jpg" alt="" id="bg2"/>
+    <img src="img/3.jpg" alt="" id="bg3"/>
+    <img src="img/4.jpg" alt="" id="bg4"/>
+    <img src="img/5.jpg"  alt="" id="bg5"/>
+    <ul>
+        <li><a href="#bg1"><img src="img/1.jpg" alt=""/></a></li>
+        <li><a href="#bg2"><img src="img/2.jpg" alt=""/></a></li>
+        <li><a href="#bg3"><img src="img/3.jpg" alt=""/></a></li>
+        <li><a href="#bg4"><img src="img/4.jpg" alt=""/></a></li>
+        <li><a href="#bg5"><img src="img/5.jpg" alt=""/></a></li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+http://www.colorzilla.com/gradient-editor/ 渐变工具使用
+http://cubic-bezier.com/  赛贝尔曲线
+transition 过渡动画
+css属性值从起始值向结束值之间实现平滑过渡的效果,只有当css属性值发生变化的时候,transition属性才能被触发,只能设置两种状态
+transition-property 过渡属性
+transition-duration 过渡动画执行的时候
+transition-timing-function 动画类型 ease-in|ease-out|ease-in-out
+transition-delay 动画延迟的时间
+
+transform变形属性2D方法 平面空间里
+transform:rotate(45deg) 旋转 正(顺) 负(逆)
+transform:skew(15deg,15deg) 倾斜
+transform:translate(15px,50px) 平移
+transform:scale(1,1) 缩放 默认值是1 <1是缩小 >1是放大
+组合起来一起用,但是需要注意顺序
+默认变形的基准点是中心点,rotate,skew,scale基准点可以改变,但是translate基准点永远是中心点
+transform-origin:left center ;第一个参数是x轴坐标 第二个参数是y轴的坐标
+left == left center ==center left
+
+关键帧动画
+1.@keyframes 声明关键帧动画
+2.animation调用声明关键帧动画
+
+@keyframes 动画名{
+    0%{
+      transform:rotate(0deg)
+    }
+    100%{
+       transform:rotate(360deg)
+    }
+}
+animation-name 动画名
+animation-duration 动画执行的时间
+animation-timing-function 动画类型
+animation-delay 动画延迟时间
+animation-interation-count 动画执行的次数 infinite(无限次)
+animation-direction:normal|reverse|alternate|alternate-reverse 动画运行的方向
+animation-fill-mode:none|backwards|forwards|both 动画结束之后的状态
+backwards 回到开始的状态
+forwards 停留在最后一帧
+both 结束后停留在第一帧或最后一帧
+简写写法:
+对着上面细分属性的顺序
+animation:move 1s ease-in 1s 2  alternate forwards
+
+transform 3D方法
+transform-style:flat(默认值)|preserve-3d (3D空间里展示) 作用在嵌套着的变形元素的父标签上
+perspective:600px 作用在变形元素的父标签上
+视距 用户与元素在Z轴平面上的距离  距离越小,物体看上去越大,距离越大,物体看上去越小
+transform:perspective(600px) 直接作用在变形元素上
+perspective-origin:right 透视点的位置
+
+translate3d(tx,ty,tz) translateX() translateY() translateZ()
+translateZ()的效果相当于在平面空间scale()的效果
+scale3d(sx,sy,sz) 默认值1 sx:X轴方向的缩放值 sy:Y轴方向的缩放值 sz:Z轴方向的缩放值 scaleX() scaleY() scaleZ(),scaleZ()不可以单独使用,必须匹配其他变形属性一起使用才有效果
+rotate3d(rx,ry,rz,a) rx,ry,rz参数矢量坐标 a是角度  根据这四个参数算出X轴,y轴,z轴方向的旋转角度 rotate3d(1,0.3,1.7,30deg);
+rotateX(45deg) rotate3d(1,0,0,45deg)    围着X轴上下翻转 正值:往前翻 负值:往后翻
+rotateY(45deg) rotate3d(0,1,0,45deg)    围着y轴左右翻转 正值:往右翻,负值:往左翻
+rotateZ(45deg) rotate3d(0,0,1,45deg) 围着Z轴翻转 效果和rotate()一样,但是是在Z轴上翻转
+
+
+
+
+
+
+
+
+
+
+

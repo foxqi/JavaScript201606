@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script async src="js/zepto.js" onload="alert(2)"></script>-->
+    <!--<script defer src="js/index.js" onload="alert(1)"></script>-->
+</head>
+<body>
+<form id="form1" action="a.php" method="post" autocomplete="on">
+    <label>搜索:</label>
+    <input type="search" autofocus placeholder="请输入搜索内容" required/>
+    <label>手机号码:</label>
+    <input type="tel" tabindex="2"/>
+    <label>url地址:</label>
+    <input type="url" autofocus/>
+    <label>邮箱:</label>
+    <input type="email" tabindex="1"/><br>
+    <label>数字:</label>
+    <input type="number" tabindex="3"/><br>
+    0<input type="range" min="0" max="50" value="25"/>50<br>
+    <input type="color"/><br>
+    <input type="time"/><br>
+    <input type="text" required/>
+    <input type="submit" formmethod="get" for value="提交"/>
+    <ol start="50" reversed>
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+    </ol>
+</form>
+<input type="text" form="form1"/>
+<iframe seamless src="http://www.baidu.com" frameborder="0" width="1000" height="500"></iframe>
+<p data-item="aaa">确定标签是否可见</p>
+<textarea name="aa" id="" cols="30" rows="10" spellcheck="true">111</textarea>
+
+<p contenteditable="true">是否可编辑</p>
+<script>
+    window.document.designMode = "on";
+</script>
+
+<p>一段
+    <mark>英文</mark>
+    文字
+</p>
+<progress max="100" min="0" value="80">80%</progress>
+<time datetime="2016-06-26T9:00Z" pubdate>9:00</time>
+<ruby>
+    aaa
+    <rt>注释内容</rt>
+    <rp>ruby不兼容的时候,注释的内容以rp标签写的为准</rp>
+    bbb
+</ruby>
+<br>
+
+<p>1111111111111111111111
+    <wbr>
+    22222
+    <wbr>
+    3333
+    <wbr>
+</p>
+<details open>
+    <summary>标题</summary>
+    <ul>
+        <li>11</li>
+        <li>222</li>
+        <li>333</li>
+    </ul>
+</details>
+<input type="text" list="shop"/>
+<datalist id="shop">
+    <option value="aaa"></option>
+    <option value="a1"></option>
+    <option value="b1"></option>
+    <option value="b2"></option>
+</datalist>
+
+<form oninput="x.value = parseInt(a.value)+parseInt(b.value)">
+    0<input type="range" id="a" max="50" min="0" value="20"/>50 +
+    <input type="number" id="b" value="10"/>
+    <output name="x" for="a b"></output>
+</form>
+
+<menu type="toolbar">
+    <menuitem onclick="aa()"></menuitem>
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+
+</menu>
+
+
+</body>
+</html>

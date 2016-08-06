@@ -1,0 +1,27 @@
+display:flex
+flex-direction:row|column|row-reverse|column-reverse 确定主轴的排列方向
+flex-wrap:nowrap|wrap|wrap-reverse
+order 子容器的排列顺序,值越小越排在前面
+核心部分:
+细分写法
+flex-grow
+flex-shrink
+flex-basis
+复合写法
+flex
+flex:0 1 auto (默认)
+flex:1 ->flex:1 1 0%
+flex:none ->flex:0 0 auto
+flex:auto ->flex:1 1 auto
+
+子容器对齐
+justify-content(主轴的对齐方式):flex-start|flex-end|center|space-between|space-around
+align-items(交叉轴的对齐方式):flex-start|flex-end|center|baseline|stretch
+align-self(用来覆盖父容器指定的方式)
+align-content(在交叉轴方向上子容器之间的空白空间,如果是"单行"则不起作用):flex-start|flex-end|center|space-between|space-around|stretch
+
+
+
+
+
+

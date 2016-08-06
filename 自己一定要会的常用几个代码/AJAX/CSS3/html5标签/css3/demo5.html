@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>box-shadow</title>
+    <style type="text/css">
+        ul{
+            list-style: none;
+        }
+        ul li{
+            width: 100px;
+            height: 100px;
+            border:1px solid red;
+            margin: 30px;
+        }
+        ul li:nth-child(1){
+            box-shadow: -2px -3px 10px 5px rgba(63,36,255,0.5);
+        }
+        ul li:nth-child(2){
+            box-shadow: 10px 0 5px -5px rgba(63,36,255,0.5);
+        }
+        ul li:nth-child(3){
+            box-shadow: 1px 2px 5px 1px rgba(63,36,255,0.5),
+            3px 4px 5px 2px rgba(81, 255, 66, 0.5), 5px 6px 5px 2px rgba(255, 64, 83, 0.5), 7px 8px 10px 2px rgba(164, 255, 12, 0.5);
+        }
+        ul li:nth-child(5){
+            width: 100%;
+            font-size: 50px;
+            text-shadow: 1px 2px 5px  rgba(63,36,255,0.5),
+            3px 4px 5px rgba(23, 105, 17, 0.66), 5px 6px 5px rgba(0, 0, 0, 0.5), 7px 8px 10px rgba(31, 107, 187, 0.5), 10px 20px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        ul li:nth-child(6){
+            box-shadow: 0 0 0 20px red;/*效果类似于设置了边框,但是不会算在盒子模型里*/
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li>珠峰培训</li>
+    <li></li>
+</ul>
+</body>
+</html>

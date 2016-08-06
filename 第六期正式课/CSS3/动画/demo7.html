@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="reset.css"/>
+    <style type="text/css">
+        .list li{
+            float: left;
+            margin: 0 10px;
+            width: 250px;
+            position: relative;
+        }
+        .list li img{
+            width: 100%;
+            transition: transform 1s;
+        }
+        .list li h3{
+            position: absolute;
+            left:10px;
+            bottom:55px;
+            font-size: 20px;
+            color:#fff
+        }
+        .list li p{
+            padding: 10px 0;
+            font-size: 16px;
+        }
+        .imgBox{
+            width: 100%;
+            height: 170px;
+            overflow: hidden;
+        }
+        .list li:hover img{
+            transform: scale(1.2);
+        }
+        .iconList li{
+           float: left;
+            margin: 0 10px;
+        }
+        .iconList li i{
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: url(img/yl.png) no-repeat;
+        }
+        .iconList li i.icon1{
+            background-position:-91px -4px ;
+        }
+        .iconList li i.icon2{
+            background-position:-159px -4px ;
+        }
+        .iconList li i.icon3{
+            background-position:-228px -4px ;
+        }
+        .iconList li i.icon4{
+            background-position: -295px -6px;
+        }
+        .iconList li span{
+            display: inline-block;
+            height: 60px;
+            vertical-align: middle;
+            padding-left: 10px;
+        }
+        @keyframes shake {
+            0%,50%,100%{
+                transform: rotate(0deg);
+            }
+            25%{
+                transform: rotate(-25deg);
+            }
+            75%{
+                transform: rotate(25deg);
+            }
+        }
+        .iconList li:hover i{
+            animation:shake 0.3s infinite;
+            -webkit-animation: shake 0.3s infinite;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="box">
+    <ul class="list clear">
+        <li><div class="imgBox"><img src="img/hs.jpg" alt=""/></div>
+            <h3>黄山</h3>
+            <p>春意撩人 登高踏青赏春色</p>
+        </li>
+        <li><div class="imgBox"><img src="img/hs.jpg" alt=""/></div>
+            <h3>黄山</h3>
+            <p>春意撩人 登高踏青赏春色</p>
+        </li>
+        <li><div class="imgBox"><img src="img/hs.jpg" alt=""/></div>
+            <h3>黄山</h3>
+            <p>春意撩人 登高踏青赏春色</p>
+        </li>
+        <li><div class="imgBox"><img src="img/hs.jpg" alt=""/></div>
+            <h3>黄山</h3>
+            <p>春意撩人 登高踏青赏春色</p>
+        </li>
+    </ul>
+    <ul class="iconList clear">
+        <li><i class="icon1"></i><span>全球50万家酒店</span></li>
+        <li><i class="icon2"></i><span>订酒店返现金高达20%</span></li>
+        <li><i class="icon3"></i><span>国际酒店8折起</span></li>
+        <li><i class="icon4"></i><span>7×24小时服务</span></li>
+    </ul>
+</div>
+
+</body>
+</html>

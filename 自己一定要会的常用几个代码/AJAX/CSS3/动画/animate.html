@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<link rel="stylesheet" href="animate.css"/>-->
+    <style type="text/css">
+        @keyframes zoomOutUp {
+            40% {
+                opacity: 1;
+                -webkit-transform: scale3d(.475, .475, .475) translate3d(0, 60px, 0);
+                transform: scale3d(.475, .475, .475) translate3d(0, 60px, 0);
+                -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+                animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+            }
+
+            to {
+                opacity: 0;
+                -webkit-transform: scale3d(.1, .1, .1) translate3d(0, -2000px, 0);
+                transform: scale3d(.1, .1, .1) translate3d(0, -2000px, 0);
+                -webkit-transform-origin: center bottom;
+                transform-origin: center bottom;
+                -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+                animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+            }
+        }
+        h1{
+            animation:zoomOutUp 1s 2 both ;
+        }
+
+    </style>
+</head>
+<body>
+<h1>珠峰培训珠峰培训珠峰培训</h1>
+</body>
+</html>

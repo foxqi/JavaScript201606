@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding:0
+        }
+        .container{
+            list-style: none;
+            width: 200px;
+            display: flex;
+            flex-flow: row nowrap;
+        }
+        .container li{
+            height: 100px;
+        }
+        .container li:nth-child(1){
+            background: green;
+            width: 140px;
+            flex: 3 1 0%;
+        }
+        .container li:nth-child(2){
+            background: orange;
+            width: 100px;
+            flex: 2 2 auto;
+        }
+        .container li:nth-child(3){
+            background: deepskyblue;
+            flex: 1 3 200px;
+        }
+
+        /*
+        多余空间:
+        基准值:0+100+200 = 300
+        父容器 :600
+        多余的空间:300
+        flex-grow : 6 ->50
+        li:nth-child(1) ->0+150->150
+        li:nth-child(2) ->100+100 ->200
+        li:nth-child(3) ->200+50 ->250
+
+        溢出空间:
+        溢出空间100px
+        0*1+100*2+200*3 = 800;
+        li:nth-child(2): 2*100/800 = 需要减去空间/溢出空间(100)
+                        需要减去空间 = 100*0.25 = 25;
+                        100- 25 = 75
+        li:nth-child(3) 125
+        */
+
+
+    </style>
+</head>
+<body>
+<!--flexbox的核心属性:
+flex-grow 默认值是0 分配多余空间的比例
+flex-shrink 默认值是1 处理溢出空间的比例
+flex-basis 默认值是auto 基准值
+    百分比 0% 相对于父容器的比例 如果父容器没有设置宽度(auto),则是自身内容的宽度
+    固定数值 100px
+    auto 如果设置width:100px 这时基准值就是100px,如果没有设置width的值,则是自身内容的宽度
+
+flex:<flex-grow> <flex-shrink> <flex-basis>
+-->
+
+<ul class="container">
+    <li class="item">1111222</li>
+    <li class="item">2222</li>
+    <li class="item">3333</li>
+</ul>
+</body>
+</html>

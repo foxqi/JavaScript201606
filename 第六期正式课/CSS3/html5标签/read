@@ -1,0 +1,186 @@
+1.htm5标签
+2.html5表单
+3.html5音/视频
+4.cavans 构建图形界面
+5.本地存储,离线存储
+
+
+结构标签
+ 构建语义化界面,有利于搜索引擎更好的理解你的页面
+ 让页面的文档结构更加清晰
+ header  页面/页面区块的头部
+ section  将页面划分成独立的区块
+ article  设置页面的独立区域 为摘要内容设计的,比如说一篇文章
+ figure   独立于内容的章节 ,一般情况下放图片 ->插画
+ figcaption 图题
+ aside  辅助信息,如果删除对整个页面没有影响 常用于侧边栏
+ nav 导航栏
+ hgroup 组合标题
+ footer 底部
+ main 主要的重要的内容
+
+表单标签
+
+search (搜索输入框)
+tel (电话号码输入框)
+url 输入url地址
+email 邮件输入框
+number 数字输入框
+rang 数字滚动条 (通过拖动滚动条改变一定范围内的数字)
+color 颜色选取器 只在 Opera 和 Blackberry 浏览器
+data 日期选择器 (和datatime与datatime-local相比,少时间框和UTC
+datetime 日期时间选择器 (UTC时间和日期)
+datetime-local 本地时间和日期选择器
+month月份选择器
+week 周选择框
+time 时间文本框
+
+
+媒体标签
+
+video元素 (视频)
+audio 元素(音频)
+embed元素(用来插入各种媒体,格式可以是Midi,Wav,AIFF,AU,MP3等,相当于一个插
+件)
+
+其他功能的标签
+
+mark (高亮显示)
+progress (进度条)
+time (时间或日期,或同时表示两者)
+ruby (注释)
+rt (注释内容)
+rp (在ruby中使用,以定义不支持ruby元素的浏览器所显示的内容)
+wbr (软换行,如果一行放的下则不换行,放不下则才换行)
+cavans (图形)
+command (命令按钮,如单选按钮,复选框或按钮,但各个浏览器支持不好)
+details (用户要求得到并且可以得到详细信息)
+summary (和details一起使用,表示标题,用户点击标题时会得到细节信息)
+datelist (配合表单元素一起使用,可以设置提示信息)
+output (不同类型的输出,比如脚本的输出)
+
+表单属性
+
+autocomplete 是否自动填充表单，默认值是 no
+autofocus 自动聚焦
+formnovalidate 和 novalidate 它俩都表示不需要验证表单,直接提交
+pattern 使用正则表达式验证 input 元素的内容
+placeholder  输入框占位符，常用作输入提示
+required 是否允许为空
+
+全局属性
+data-yourvalue 自定义属性
+hidden 加上这个属性,元素则是不可见状态
+Spellcheck 对你输入的内容纠错
+tabindex 按下tab键可以根据设置的顺序进行跳转
+contenteditable=”true” 表示这块内容是可以编辑的 去掉则不可以修改
+desginMode 在js中控制,页面上所有的元素都可编辑
+
+css3的好处
+1.实现很多非常炫的效果
+2.提高页面的性能,节省开发时间
+css3的兼容性
+优雅降级 构建完整的站点,然后再通过调试去兼容浏览器
+渐进增强 刚开始构建站点很少的特性,然后再去增加和扩展功能
+
+css3选择器
+ 关系选择器
+ E F E元素后代F元素
+ E>F E元素子元素F
+ E+F E元素相邻的弟弟节点
+ E~F E元素所有的弟弟节点
+ 结构选择器
+  :nth-child(2n+1) 子元素中的第几个
+  :nth-of-type(3) 指定类型里的子元素的第几个
+  :first-child 第一个子节点
+  :last-child 最后一个子节点
+  :first-of-type 设定类型的第一个子节点
+  :last-of-type 设定类型的最后一个子节点
+  :only-child 只有一个子节点
+  :only-of-type 只有一个类型的子节点
+  :empty  设定父标签下没有任何内容,哪怕是空格
+  :not() 不包含哪些元素()是写选择器
+  :target 匹配url指向的目标元素
+
+  属性选择器
+  E[attr = val] attr等于val
+  E[attr|=val] attr等于val或者val-开头
+  E[attr*=val] 只要包含val字符串就行
+  E[attr~=val] 值可以有多个,其中一个是val就行
+  E[attr^=val] 以val开头
+  E[attr$=val] 以val结尾
+
+渐变
+  线性渐变  颜色是沿着一条直线轴变化
+    linear-gradient
+    第一个参数 :渐变的方向
+    left
+    to left
+    left bottom
+    right top
+    45deg 逆时针转45deg
+    -45deg 顺时针转45deg
+    第二个参数开始用来设置渐变的颜色
+    repeating-linear-gradient 重复的线性渐变
+ 径向渐变 从一个起点向多方向变化  有水平半径/垂直半径(默认是从中心点)
+ 第一个参数 设置圆点的位置
+    径向渐变的形状可以是circle/ellipse
+    关键词
+    circle at  center ->center center ->50% 50%
+    circle at  left  ->left center ->0% 50%
+    circle at  right->right center ->100% 50%
+    circle at  top->top center ->0% 50%
+    circle at  bottom->bottom center ->100% 50%
+    circle at 10px 20px
+
+ 第二个参数开始设置渐变的颜色
+ repeating-radial-gradient 重复的径向渐变
+圆角
+border-radius
+在上右下左四个方向可以设置圆的水平半径和垂直半径
+当有边框很大时,会产生一个外半径和内半径
+内半径的值 = 外半径-边框 如果值小于零,则内半径呈现直角,否则内半径圆的半径等于外半径-边框
+盒子阴影
+box-shadow
+第一个值:x轴方向偏移 正(右) 负(左)
+第二个值:y轴方向偏移 正(下) 负(上)
+第三个值:模糊半径(模糊度)
+第四个值:扩展半径(阴影的深度) 正(往外扩展) 负(往内收缩)
+第五个值:颜色
+
+文本阴影
+第一个值:x轴方向偏移 正(右) 负(左)
+第二个值:y轴方向偏移 正(下) 负(上)
+第三个值:模糊半径(模糊度)
+第四个值:颜色
+
+背景(background)
+  background-attachment: fixed;
+  background-origin(背景图片从哪里开始显示)
+  background-origin:padding-box(默认值)|content-box|border-box
+  background-clip (从哪个区域开始往外裁剪)
+  background-clip:padding-box|content-box|border-box
+  background-size (设置背景图片的大小)
+  background-size:10px 20px
+  background-size:contain|cover
+  background-size:50% 50% (百分比相对于当前元素)
+
+多列布局
+ column-width 列宽
+ column-count 最大列数
+ columns 是column-width和column-count的复合写法
+ column-gap 列间隙
+ column-rule 列边框
+ column-gap 横跨所有的列
+
+transition 过渡动画
+transform 变形属性(2D   变形方法)
+animation 关键帧动画
+transform 变形属性(3D变形方法)
+
+
+
+
+
+
+
