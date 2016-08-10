@@ -18,3 +18,4 @@ for (var i = 1; i <= 96; i++) {
 var fs = require("fs");
 fs.writeFileSync("./student.json", JSON.stringify(ary), "utf-8");
 
+
